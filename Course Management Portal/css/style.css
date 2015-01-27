@@ -1,0 +1,623 @@
+/*Start Common Styles*/
+body
+{
+	margin:0;
+	padding:0;
+    background-color: #f1f1f1;
+}
+.Round-Button
+{
+	border-radius:25px;
+	width:75px;
+	height:25px;
+	color:#fff;
+	border:1px solid #000;
+	background-color:#008b54;
+}
+.mainimageloginpage
+{
+
+}
+*
+{
+	font-family: Verdana,arial, sans-serif;
+}
+
+.error-message{ color: #ff0000; }
+
+.error-message div{ clear: both; }
+
+.small-number-field{ width: 50px; }
+
+p{
+    vertical-align:middle;
+}
+
+h2{
+    font-style:italic;
+}
+
+/* END Common Styles */
+
+
+/* Start LoginPage*/
+.LoginPage-MainContainer
+{
+    min-height: 600px;
+    max-width: 1024px;
+    border: 1px solid #000;
+    background-color: #FFF;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.LoginPage-MainContainer .error-message{
+    text-align: center;
+    margin: 20px 0 -20px 0;
+}
+
+.LoginPage-LogoHeader
+{
+	height: 150px;
+	width:1024px;
+	background:url(../images/FinalLongLogo.png);
+}
+.LoginPage-LoginFormContainer
+{
+	width:400px;
+	height:200px;
+	border:1px solid #000;
+    margin: 120px auto;
+	background-color:#f9f9f9;
+}
+
+.LoginPage-Form
+{
+	height:200px;
+    width: 280px;
+	margin-left:auto;
+	margin-right: auto;
+	margin-top:50px;
+	text-align: right;;
+}
+
+
+.LoginPage-FooterContainer
+{
+	height:120px;
+	width:1024px;
+	background:url(../images/FinalFooter.png);
+    position: absolute;
+    bottom: 0;
+}
+/* END LoginPage*/
+/* Start PopupPage*/
+.PopupPage-MainContainer
+{
+	max-width:1400px;
+	min-width:1400px;
+	height:auto;
+	background-color: #f9f9f9;
+	margin:0 auto;
+	position:relative;
+    border:1px solid #444444;
+}
+.PopupPage-HeaderContainer
+{
+	max-width:500px;
+	height:125px;
+	margin:0 auto;
+	position: relative;
+}
+
+.HeaderText
+{
+	float:left;
+	margin-left:10%;
+}
+.HeaderInfo
+{
+	float:left;
+	margin-top:5px;
+}
+.HeaderInfoList
+{
+	list-style-type:none;
+}
+.PopupPage-HeaderButtonContainer
+{
+	border:1px solid #000;
+	float:right;
+	margin-top:30px;
+	margin-right:10px;
+	text-align:center;
+}
+.btndoneediting
+{
+	height:30px;
+	width:120px;
+	display:block;
+	text-decoration:none;
+	line-height:30px;
+	color:#000;
+	-webkit-transition: all .3s ease-in-out;
+	transition: all .3s ease-in-out;
+}
+.btndoneediting:hover
+{
+	background-color:green;
+	color:#fff;
+	-webkit-transition: all .3s ease-in-out;
+	transition: all .3s ease-in-out;
+}
+.PopupPage-NavigationContainer
+{
+	max-width:100%;
+	min-width:1024px;
+	height:50px;
+	background-color:green;
+}
+.nav
+{
+	text-align:center;
+	height:50px;
+	position:absolute;
+}
+.navitem
+{
+	display:inline;
+	border-right:1px solid #000;
+	padding-top:15px;
+	padding-bottom:15px;
+	
+}
+.navlink
+{
+	padding-left:110px;
+	padding-right:110px;
+	width:300px;
+	text-decoration:none;
+	color:#000;
+}
+.navitem:hover
+{
+	background-color:#CCC;
+}
+.PopupPage-Footer
+{
+	height:20px;
+	background-color:#444444;
+	max-width:100%;
+	text-align:right;
+	color:#fff;
+    clear: both;
+}
+
+.PopupPage-Footer h4{
+    text-align: center;
+}
+.PopupPage-BodyContainer
+{
+	width:100%;
+    /*height: 85%;*/
+}
+.PopupPage-BodyHeaderdiv
+{
+	height:30px;
+	width:100%;
+}
+.PopupPage-FormHolder
+{
+	width:80%;
+	min-width:1024px;
+    min-height: 690px;
+	border: 1px solid #000;
+	margin:50px auto 0 auto;
+}
+.firstformtable
+{
+	display:block;
+	margin-top:10px;
+	margin-left:50px;
+	height:175px;
+	float:left;
+}
+.lstAvailableCourses
+{
+	display:block;
+	float:left;
+	width:400px;
+    height: 550px;
+}
+.btnAdd
+{
+	display:inline-block;
+	width:75px;
+	text-align:center;
+	border:1px solid #444444;
+	text-decoration:none;
+	color:#444444;
+	margin-left:50px;
+	margin-top:100px;
+	-webkit-transition: all .3s ease-in-out;
+	transition: all .3s ease-in-out;
+}
+.btnAdd:hover
+{
+	-webkit-transition: all .3s ease-in-out;
+	transition: all .3s ease-in-out;
+	background-color:green;
+	color:#fff;
+}
+.btnRemove
+{
+	display:inline-block;
+	width:75px;
+	text-align:center;
+	border:1px solid #444444;
+	text-decoration:none;
+	color:#444444;
+	margin-left:50px;
+	margin-top:100px;
+	-webkit-transition: all .3s ease-in-out;
+	transition: all .3s ease-in-out;
+}
+.btnRemove:hover
+{
+	background-color:green;
+	-webkit-transition: all .3s ease-in-out;
+	transition: all .3s ease-in-out;
+	color:#fff;
+}
+.lstPre-requisites
+{
+    margin: -37px 15px 0 0;
+    height: 550px;
+	width:400px;
+	display:block;
+	float:right;
+}
+.header1
+{
+	float:left;
+	margin-left:513px;
+}
+.header2
+{
+	float:left;
+	margin-left: 370px;
+}
+.bodyfooter
+{
+	height:50px;
+	width:100%;
+	margin-top:225px;
+	text-align:center;
+}
+.btnsubmit
+{
+	width:150px;
+	height:50px;
+}
+
+.PopupPage-leftformcontainer
+{
+	width:45%;
+	height:100%;
+	float:left;
+}
+
+.PopupPage-rightformcontainer
+{
+	width:54%;
+	height:100%;
+	text-align: center;
+	float:left;
+}
+.lstCurrentStudentsRegisteredInCourse
+{
+	display:block;
+	float:left;
+	margin-top:0px;
+	margin-left:50px;
+    width: 384px;
+    height: 500px;
+}
+.lstheader
+{
+	padding-left: 50px;
+}
+.registeredstudentsform
+{
+	margin-top:100px;
+}
+
+
+
+.lstRegisteredTextbooks
+{
+	display:block;
+	float:left;
+	margin-top:0px;
+	margin-left:50px;
+	width:300px;
+	height:400px;
+}
+.textbookheader
+{
+	padding-right:200px;
+}
+
+
+.middletd
+{
+	text-align: center;
+}
+
+
+.lstCurrentUsers
+{
+	display:block;
+	float:left;
+	margin-top:0px;
+	margin-left:50px;
+	width:300px;
+	height:400px;
+}
+.lstUserAvailableCourse
+{
+	width:150px;
+	height:300px;
+}
+.lstUserRegisteredCourse
+{
+	width:150px;
+	height:300px;
+}
+/* END PopupPage*/
+
+/* START flow chart page */
+.wrapper
+{
+    margin: 0 auto;
+    width: 1100px;
+}
+
+ul#flowchart-nav {
+    margin: 0 0 0 20px;
+}
+
+ul#flowchart-nav  li{
+    float:left;
+    padding: 20px;
+    text-align: center;
+    margin: 0 auto;
+    width: 210px;
+}
+
+ul#flowchart-nav li input{
+    line-height: 0;
+}
+
+#student-lookup input{
+    line-height: 14px !important;
+    margin: 9px 0 0 0;
+    height: 35px;
+}
+
+#student-lookup #flowchart-search-results{
+    position: absolute;
+    text-align: left;
+    margin: 10px 0 0 0;
+    background: #fff;
+    z-index: 999999999999;
+    padding: 5px;
+    display: none;
+}
+
+#student-lookup #flowchart-search-results a{
+    line-height: 30px;
+    text-decoration: none;
+    color: #777793;
+}
+
+#student-lookup #flowchart-search-results a:hover{
+    color: #000;
+}
+
+.flow-chart-btn {
+    -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+    -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+    box-shadow:inset 0px 1px 0px 0px #ffffff;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+    background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+    background-color:#ededed;
+    -webkit-border-top-left-radius:6px;
+    -moz-border-radius-topleft:6px;
+    border-top-left-radius:6px;
+    -webkit-border-top-right-radius:6px;
+    -moz-border-radius-topright:6px;
+    border-top-right-radius:6px;
+    -webkit-border-bottom-right-radius:6px;
+    -moz-border-radius-bottomright:6px;
+    border-bottom-right-radius:6px;
+    -webkit-border-bottom-left-radius:6px;
+    -moz-border-radius-bottomleft:6px;
+    border-bottom-left-radius:6px;
+    text-indent:0;
+    border:1px solid #dcdcdc;
+    display:inline-block;
+    color:#777777;
+    font-family:arial;
+    font-size:15px;
+    font-weight:bold;
+    font-style:normal;
+    height:50px;
+    line-height:50px;
+    width:150px;
+    text-decoration:none;
+    text-align:center;
+    text-shadow:1px 1px 0px #ffffff;
+}
+.flow-chart-btn:hover {
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
+    background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
+    background-color:#dfdfdf;
+}.flow-chart-btn:active {
+     position:relative;
+     top:1px;
+ }
+
+.wrapper h1 {
+    font-size: 26px;
+    text-align: center;
+    margin: 20px 0 0 0;
+    clear: both;
+}
+.level-container{
+    margin: 25px 0 75px 0;
+    height:102px;
+    clear: both;
+
+}
+
+.level-container a{
+    text-decoration: none;
+    color: #000;
+}
+
+.course-level {
+    margin: 41px 0 0 0;
+    width: 70px;
+    display: inline-block;
+    float: left;
+
+}
+
+
+p.course-number{
+    text-align: center;
+}
+
+p.course-name{
+    text-align: center;
+    height: 30px;
+}
+
+p.course-hours{
+    float: left;
+}
+
+p.course-hybrid{
+    float: right;
+}
+
+p.course-student-grade{
+    clear: both;
+}
+
+
+div.box {
+    border: 1px solid #000;
+    margin: 5px;
+    width: 140px;
+    display: block;
+    float: left;
+    font-size: 12px;
+    height: 115px;
+	border-radius:10px;
+	padding: 0 5px;
+    background: #fff;
+    opacity: 0.85;
+    font-weight: bold;
+}
+
+div.extended-box{
+    height: 135px;
+    padding: 0 5px 5px 5px;
+}
+
+footer{
+    height: 20px;
+    background-color: #444444;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+}
+
+/* END flow chart page */
+
+/* manage courses page */
+.manage-course .error-message{ margin: 0 0 20px 14px; }
+
+.manage-course .error-message div{ clear: both; }
+
+.manage-course{ width: 95% !important; padding-top: 30px; }
+
+.manage-course input.add{ float: left; margin: 153px 22px 0 34px; width: 75px; }
+
+.manage-course input.remove{ float: left; margin: 168px 0 0 -96px; width: 75px; }
+
+.manage-course textarea{
+    width: 330px;
+    height: 250px;
+    position: absolute;
+    margin: 18px 0 0 -164px;
+}
+
+.manage-course .btnsubmit{ margin: 270px 0 0 0; }
+
+.manage-course .firstformtable { margin: 10px 24px 0 10px; }
+
+/* manage students page */
+
+.manage-students .error-message{ margin: 20px 0 0 51px; }
+
+.manage-students{ width: 95% !important; }
+
+.manage-students{ width: 95% !important; }
+
+.manage-students .PopupPage-leftformcontainer{ margin: 0 0 0 66px; }
+
+.manage-students .PopupPage-rightformcontainer{ width: 40% !important; }
+
+.manage-students #manage-student-search-results{
+    position: absolute;
+    text-align: left;
+    margin: 10px 0 0 0;
+    background: #fff;
+    z-index: 999999999999;
+    padding: 5px;
+    display: none;
+}
+
+.manage-students #manage-student-search-results a{
+    line-height: 30px;
+    text-decoration: none;
+    color: #777793;
+}
+
+.manage-students #manage-student-search-results a:hover{
+    color: #000;
+}
+
+
+/* manage users page */
+#current-user-form input[type='text'], #current-user-form input[type='password'], #current-user-form select { width:200px; }
+
+.manage-users .error-message{ margin: 20px 0 0 51px; }
+
+.manage-users{ width: 95% !important; }
+
+.manage-users{ width: 95% !important; }
+
+.manage-users .PopupPage-leftformcontainer{ margin: 0 0 0 66px; }
+
+.manage-users .PopupPage-rightformcontainer{ width: 40% !important; }
+
