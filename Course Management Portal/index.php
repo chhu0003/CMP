@@ -35,6 +35,7 @@ if( $_SERVER[ 'REQUEST_METHOD' ] == "POST" ) {
 <head>
 	<link rel="stylesheet" href="css/style.css"/>
 	<link rel="shortcut icon" href="favicon.ico" type="image/png">
+    <script src="dropzone.min.js"></script>>
 </head>
 <body>
 <div class="LoginPage-MainContainer">
