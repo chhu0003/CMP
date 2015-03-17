@@ -32,7 +32,8 @@ class User extends MySQLDB
 	public static $roleNames = array(
 		10 => 'Coordinator',
 		9  => 'Assistant',
-		8  => 'Professor'
+		8  => 'Professor',
+		11  => 'Superuser'
 	);
 
 	public $ID;

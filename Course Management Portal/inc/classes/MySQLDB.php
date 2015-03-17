@@ -546,6 +546,31 @@ class MySQLDB
 
 	}
 
+		/**
+	 * DELETE all record in the database
+	 *
+	 * @return bool
+	 */
+	public function deleteAll($pageName, $ID )
+	{
+
+		global $database;
+		$delete_sql = "";
+
+		if ($pageName == "PROGRAMS"){
+			$delete_sql = "DELETE FROM " . static::$table_name . " WHERE PROGRAMS_ID ='$ID'";
+		}else{
+			$delete_sql = "DELETE FROM " . static::$table_name . " WHERE USERS_ID ='$ID'";
+		}		
+
+		//query the database
+		$database->query( $delete_sql );
+
+		//return true if the delete was successful
+		return ( $database->affected_rows() >= 1 ) ? true : false;
+
+	}
+
 	/**
 	 * @return bool|mysqli_result
 	 */

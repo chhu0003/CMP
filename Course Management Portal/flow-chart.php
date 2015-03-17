@@ -49,6 +49,9 @@ if( !$session->is_logged_in() ) {
 			<li><a href="#" class="flow-chart-btn" onclick="openWindow('manage-users.php')">Manage Users</a></li>
 			<?php }//END coordinator ?>
 		<?php }//END coordinator or assistant ?>
+		<?php if( isset( $_SESSION[ 'user_role' ] ) && $_SESSION[ 'user_role' ] > 10 ) {//superuser?>
+				<li><a href="#" class="flow-chart-btn" onclick="openWindow('manage-programs.php')">Manage Programs</a></li>
+		<?php }//END superuser ?>
 		<li>
 			<form action="#" method="post"><input type="submit" class="flow-chart-btn" name="logout" value="Logout">
 			</form>

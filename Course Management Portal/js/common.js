@@ -315,6 +315,29 @@ function showSelectedUser(userID) {
     xmlhttp.send();
 }
 
+function showSelectedProgram(programID) {
+    if (programID == "") {
+
+        return;
+    }
+
+    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            document.getElementById("current-program-form").innerHTML = xmlhttp.responseText;
+        }
+    }
+
+    xmlhttp.open("GET", "inc/ajax_files/programs-response.php?programID=" + programID, true);
+    xmlhttp.send();
+}
+
 function clearErrorMessages(){
 
     document.getElementsByClassName('error-message').text="";
@@ -383,3 +406,20 @@ function clearErrors(){
     document.getElementById('error-message').innerHTML = "";
 
 }
+
+function moveSelectedPrograms(from, to, toSelect) {
+    $('#'+from+' option:selected').remove().appendTo('#'+to);
+    var sel = "";
+    if (toSelect == 'userPrograms'){
+        sel = document.forms[0].userPrograms;
+    }else{
+        sel = document.forms[0].programCourses;
+    }
+    
+    for(var i=0; i<sel.options.length; i++){
+        sel.options[i].selected = true;
+    } 
+}
+
+
+

@@ -15,11 +15,13 @@ require_once( dirname( __FILE__ ) . '/classes/Session.php' );
 require_once( dirname( __FILE__ ) . '/classes/Course.php' );
 require_once( dirname( __FILE__ ) . '/classes/Student.php' );
 require_once( dirname( __FILE__ ) . '/classes/Book.php' );
+require_once( dirname( __FILE__ ) . '/classes/Program.php' );
 require_once( dirname( __FILE__ ) . '/classes/Validator.php' );
 require_once( dirname( __FILE__ ) . '/classes/UserValidator.php' );
 require_once( dirname( __FILE__ ) . '/classes/TextbookValidator.php' );
 require_once( dirname( __FILE__ ) . '/classes/StudentValidator.php' );
 require_once( dirname( __FILE__ ) . '/classes/CourseValidator.php' );
+require_once( dirname( __FILE__ ) . '/classes/ProgramValidator.php' );
 
 
 //include functions
