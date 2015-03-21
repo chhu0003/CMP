@@ -7,7 +7,10 @@
 	define('DB_HOST', 'localhost');
 
 	// MySQL username
-	define('DB_USER', 'terry');
+	define('DB_USER', 'cmp_usr');
 
 	// MySQL password
-	define('DB_PASSWORD', 'terry');
+	define('DB_PASSWORD', 'pc5fbBytUVubzWnF');
+
+
+
