@@ -47,6 +47,7 @@ if( !$session->is_logged_in() ) {
 					Course</a></li>
 		<?php if( isset( $_SESSION[ 'user_role' ] ) && $_SESSION[ 'user_role' ] > 9 ) {//coordinator?>
 			<li><a href="#" class="flow-chart-btn" onclick="openWindow('manage-users.php')">Manage Users</a></li>
+                <a href="#" class="flow-chart-btn" onclick="openWindow('reports.php')">Reports</a></li>
 			<?php }//END coordinator ?>
 		<?php }//END coordinator or assistant ?>
 		<?php if( isset( $_SESSION[ 'user_role' ] ) && $_SESSION[ 'user_role' ] > 10 ) {//superuser?>
