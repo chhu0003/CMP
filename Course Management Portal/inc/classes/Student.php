@@ -24,6 +24,7 @@ class Student extends MySQLDB
 		'student_lname',
 		'student_email',
 		'student_phone',
+        'graduated',
 	);
 
 	public $ID;
@@ -32,6 +33,7 @@ class Student extends MySQLDB
 	public $student_lname;
 	public $student_email;
 	public $student_phone;
+    public $graduated;
 
 	public function __construct()
 	{
@@ -93,6 +95,52 @@ class Student extends MySQLDB
 
 	}
 
+    /**
+     * @param $year
+     * @param $programID
+     * @return bool|mixed
+     */
+    public static function find_all_by_graduated($programID, $year)
+    {
+
+        $find_all_by_graduated_year_and_program_sql = "SELECT * FROM " . self::$table_name . " WHERE graduating_year={$year} AND programID={$programID}";
+
+        //query the database with the user_login
+        $result_array = parent::find_by_sql( $find_all_by_graduated_year_and_program_sql );
+
+        //if the $result_array isn't empty use array_shift() so that only the user object inside the array is
+        //returned. Otherwise, return false so that we know the user wasn't found
+        //return !empty( $result_array ) ? array_shift( $result_array ) : false;
+        return !empty( $result_array ) ? $result_array : false;
+
+    }
+
+    public static function find_all_by_missing_course($programID,$year)
+    {
+     $find_all_by_missing_course_sql = "SELECT * FROM student_grades AND" .self::$table_name .
+         "WHERE student_grades.letter_grade = null AND programID{$programID} AND year={$year}";
+
+        //query the database with the user_login
+        $result_array = parent::find_by_sql( $find_all_by_missing_course_sql );
+
+       //if the $result_array isn't empty use array_shift() so that only the user object inside the array is
+        //returned. Otherwise, return false so that we know the user wasn't found
+        //return !empty( $result_array ) ? array_shift( $result_array ) : false;
+        return !empty( $result_array ) ? $result_array : false;
+    }
+    public static function find_all_by_failed_course($programID,$year)
+    {
+        $find_all_by_missing_course_sql = "SELECT * FROM student_grades AND" .self::$table_name .
+            "WHERE student_grades.letter_grade = 'F' AND programID{$programID} AND year={$year}";
+
+        //query the database with the user_login
+        $result_array = parent::find_by_sql( $find_all_by_missing_course_sql );
+
+        //if the $result_array isn't empty use array_shift() so that only the user object inside the array is
+        //returned. Otherwise, return false so that we know the user wasn't found
+        //return !empty( $result_array ) ? array_shift( $result_array ) : false;
+        return !empty( $result_array ) ? $result_array : false;
+    }
 }
 
 /**
