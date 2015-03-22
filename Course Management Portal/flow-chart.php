@@ -43,11 +43,14 @@ if( !$session->is_logged_in() ) {
 			</form>
 		</li>
 		<?php if( isset( $_SESSION[ 'user_role' ] ) && $_SESSION[ 'user_role' ] > 8 ) {//coordinator or assistant ?>
-			<li><a href="#" class="flow-chart-btn" onclick="openWindow('manage-course.php?course_ID=0')">Add New
-					Course</a></li>
+			<li><a href="#" class="flow-chart-btn" onclick="openWindow('manage-course.php?course_ID=0')">Manage
+					Courses</a></li>
+            <li><a href="#" class="flow-chart-btn" onclick="openWindow('manage-cstudent.php?course_ID=0')">Manage
+                    Students</a</li>
 		<?php if( isset( $_SESSION[ 'user_role' ] ) && $_SESSION[ 'user_role' ] > 9 ) {//coordinator?>
 			<li><a href="#" class="flow-chart-btn" onclick="openWindow('manage-users.php')">Manage Users</a></li>
-                <a href="#" class="flow-chart-btn" onclick="openWindow('reports.php')">Reports</a></li>
+                <li><a href="#" class="flow-chart-btn" onclick="openWindow('reports.php')">Reports</a></li>
+                <li><a href="#" class="flow-chart-btn" onclick="openWindow('uploadCSV.php')">Upload CSV</a></li>
 			<?php }//END coordinator ?>
 		<?php }//END coordinator or assistant ?>
 		<?php if( isset( $_SESSION[ 'user_role' ] ) && $_SESSION[ 'user_role' ] > 10 ) {//superuser?>
