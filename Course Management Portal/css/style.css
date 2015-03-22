@@ -411,10 +411,10 @@ ul#flowchart-nav {
 
 ul#flowchart-nav  li{
     float:left;
-    padding: 20px;
+    padding: 2px;
     text-align: center;
     margin: 0 auto;
-    width: 210px;
+   /* width: 210px;*/
 }
 
 ul#flowchart-nav li input{
@@ -472,12 +472,12 @@ ul#flowchart-nav li input{
     display:inline-block;
     color:#777777;
     font-family:arial;
-    font-size:15px;
+    font-size:11px;
     font-weight:bold;
     font-style:normal;
-    height:50px;
+    height:45px;
     line-height:50px;
-    width:150px;
+    width:115px;
     text-decoration:none;
     text-align:center;
     text-shadow:1px 1px 0px #ffffff;
