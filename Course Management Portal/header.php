@@ -21,7 +21,7 @@ if( isset( $_GET[ 'course_ID' ] ) && $_GET[ 'course_ID' ] != 0 ) {
 	require_once( dirname( __FILE__ ) . '/course-management-header.php' );
 }elseif( strpos( $_SERVER[ 'SCRIPT_FILENAME' ], 'reports.php' )) {
     $pageTitle = "Reports";
-    //get the course management header
+    //get the reports header
     require_once( dirname( __FILE__ ) . '/reports-header.php' );
 
 } elseif( strpos( $_SERVER[ 'SCRIPT_FILENAME' ], 'manage-users.php' ) || $_GET[ 'course_ID' ] == 0 ) {
@@ -36,6 +36,8 @@ if( isset( $_GET[ 'course_ID' ] ) && $_GET[ 'course_ID' ] != 0 ) {
 
     //get the manage-users header
     require_once(dirname(__FILE__) . '/add-user-or-course-header.php');
+    // get the manage-students header
+
 
 
 } else {

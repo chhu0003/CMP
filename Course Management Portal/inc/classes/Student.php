@@ -103,7 +103,8 @@ class Student extends MySQLDB
     public static function find_all_by_graduated($programID, $year)
     {
 
-        $find_all_by_graduated_year_and_program_sql = "SELECT * FROM " . self::$table_name . " WHERE graduating_year={$year} AND programID={$programID}";
+        //$find_all_by_graduated_year_and_program_sql = "SELECT * FROM " . self::$table_name . " WHERE graduating_year={$year} AND programs_id={$programID}";
+        $find_all_by_graduated_year_and_program_sql = "SELECT *, (SELECT ID FROM programs WHERE program_code={$programID} AND program_year={$year}) AS 'programID' FROM " . self::$table_name . " WHERE graduating_year={$year} AND programs_id='programID'";
 
         //query the database with the user_login
         $result_array = parent::find_by_sql( $find_all_by_graduated_year_and_program_sql );

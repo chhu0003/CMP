@@ -8,10 +8,12 @@ class HTMLReportGenerator
 
     public function generateGraduatedStudentReport($arrayOfStrParameters)
     {
-        var_dump($arrayOfStrParameters);
-        if(sizeof($arrayOfStrParameters) == 2) {
-            $programID = $arrayOfStrParameters[0];
-            $year = $arrayOfStrParameters[1];
+        if( $_SERVER[ 'REQUEST_METHOD' ] == 'GET' ) {
+            var_dump($_GET['reportName']);
+        }
+        if(sizeof($arrayOfStrParameters) == 3) {
+            $programID = $arrayOfStrParameters['selectProgram'];
+            $year = $arrayOfStrParameters['selectYear'];
             $students = Student::find_all_by_graduated($programID, $year);
             $error = "No students found";
             ?>
@@ -19,8 +21,7 @@ class HTMLReportGenerator
                 <tr>
                     <th>Student Name</th>
                     <th>Student Number</th>
-                    <th>Graduating Year</th>
-                </tr>
+                 </tr>
                 //if false write a message on one row
                 //else generate results
                 <?php if ($students = false) {
@@ -132,9 +133,13 @@ class HTMLReportGenerator
         }
     }
 
-    public function getReport($strReportName, $arrayOfStrParameters){
-        call_user_func($this,"generate". $strReportName, $arrayOfStrParameters);
-    }
+    /*public function getReport($strReportName, $arrayOfStrParameters){
+
+        var_dump($arrayOfStrParameters);
+        var_dump($_GET['reportName']);
+        call_user_func( $_POST['reportName'], $arrayOfStrParameters);
+        var_dump(call_user_func($this,"generate". $_POST[reportName], $arrayOfStrParameters));
+    }*/
 }
 
 
