@@ -18,13 +18,16 @@ class StudentValidator extends Validator
      * accessible to the current user.
      * */
     protected static $roles = array(
-        //Role 10 = Administrator
+    //Role 11 = Superuser
+    11 => array("student_number", "student_fname", "student_lname", "student_email", 
+        "student_phone", "letter_grade", "numeric_grade"),
+    //Role 10 = Administrator
 	10 => array("student_number", "student_fname", "student_lname", "student_email", 
 		"student_phone", "letter_grade", "numeric_grade"),
-        //Role 9 = Administrator's Assistant
+    //Role 9 = Administrator's Assistant
 	9 => array("student_number", "student_fname", "student_lname", "student_email",
 		"student_phone", "letter_grade", "numeric_grade"),
-        //Role 8 = Professor
+    //Role 8 = Professor
 	8 => array("student_number", "student_fname", "student_lname", "student_email", 
 		"student_phone", "letter_grade", "numeric_grade")
     );

@@ -96,6 +96,8 @@ if( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' ) {
 				"course_hybrid" => $courseHybrid,
 			);
 		
+		echo $oldValuesToValidate;
+		echo $newValuesToValidate;
 			$courseValidation = new CourseValidator($oldValuesToValidate,$newValuesToValidate);
 			$courseValidated = $courseValidation->run();
 		
@@ -139,7 +141,7 @@ if( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' ) {
 		}else{
 
 			//check to see if the course being added is already a prerequisite of this course
-			$coursePrerequisite = CoursePrerequisite::find_by_course_ID_and_course_prerequisite_course_number( $_GET[ 'course_ID' ], $selectedCourse->course_number );
+			$coursePrerequisite = CoursePrerequisite::find_by_course_ID_and_course_prerequisite_course_number( $_GET[ 'program_ID' ], $_GET[ 'course_ID' ], $selectedCourse->course_number );
 
 			//if this course isn't already a prerequisite of this course
 			if( !$coursePrerequisite ) {
@@ -149,6 +151,7 @@ if( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' ) {
 
 				//set the values for the prerequisite to be added
 				$coursePrerequisite->course_prerequisites_course_number = $selectedCourse->course_number;
+				$coursePrerequisite->programs_ID                        = $_GET[ 'program_ID' ];
 				$coursePrerequisite->courses_ID                         = $_GET[ 'course_ID' ];
 				$coursePrerequisite->save(); //add it to the db
 
@@ -173,7 +176,7 @@ if( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' ) {
 		$courseToDelete = Course::find_by_ID( $courseID );
 
 		//check to see if the course has prerequisites
-		$courseHasPrerequisites = CoursePrerequisite::find_by_course_ID( $courseID );
+		$courseHasPrerequisites = CoursePrerequisite::find_by_course_ID( $_GET[ 'program_ID' ], $courseID );
 
 		if( $courseHasPrerequisites ){
 
@@ -214,9 +217,12 @@ if( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' ) {
 		<div class="header1">
 			Available Courses
 		</div>
-		<div class="header2">
-			Pre-Requisites
-		</div>
+
+		<?php if ($_GET[ 'program_ID' ] > 0) {?>
+			<div class="header2">
+				Pre-Requisites
+			</div>
+		<?php }?>
 	</div>
 
 	<form action="#" method="post">
@@ -282,24 +288,26 @@ if( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' ) {
 
 			?>
 		</select>
-		<input type="submit" name="btnAdd" value="Add >" class="add"/><br /><br />
-		<input type="submit" name="btnRemove" value="< Remove" class="remove" />
-		<select class="lstPre-requisites" size="10" name="lstPre-Requisites">
-			<?php
 
-			$prerequisites = CoursePrerequisite::find_by_course_ID( $_GET[ 'course_ID' ] );
+		<?php if ($_GET[ 'program_ID' ] > 0) {?>
+			<input type="submit" name="btnAdd" value="Add >" class="add"/><br /><br />
+			<input type="submit" name="btnRemove" value="< Remove" class="remove" />
+			<select class="lstPre-requisites" size="10" name="lstPre-Requisites">
+				<?php
 
-			foreach( $prerequisites as $prerequisite ) {
+				$prerequisites = CoursePrerequisite::find_by_course_ID( $_GET[ 'program_ID' ], $_GET[ 'course_ID' ] );
+
+				foreach( $prerequisites as $prerequisite ) {
+					?>
+					<option
+						value="<?php echo $prerequisite->ID; ?>"><?php echo $prerequisite->course_number . ' - ' . $prerequisite->course_name; ?></option>
+
+				<?php
+				}
+
 				?>
-				<option
-					value="<?php echo $prerequisite->ID; ?>"><?php echo $prerequisite->course_number . ' - ' . $prerequisite->course_name; ?></option>
-
-			<?php
-			}
-
-			?>
-		</select>
-
+			</select>
+		<?php }?>
 	</form>
 
 <?php require_once( dirname( __FILE__ ) . '/footer.php' ); ?>

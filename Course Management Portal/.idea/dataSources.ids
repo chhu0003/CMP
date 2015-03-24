@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - cmp@localhost" uuid="f8e70c93-441f-4659-bb67-fd5e45c747c5">
+    <database-info product="MySQL" version="5.6.22" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.34 ( Revision: jess.balint@oracle.com-20141014163213-wqbwpf1ok2kvo1om )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="mixed" quoted-identifiers="upper"/>
+    <schema name="" catalog="cmp"/>
+    <table name="books" schema="" catalog="cmp" type="TABLE">
+      <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="book_title" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="book_isbn" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="book_edition" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="book_author" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="book_publisher" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="book_type" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12" remarks="SGFyZCBDb3ZlciAvIFNvZnQgQ292ZXI="/>
+      <column name="book_quantity" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="book_required" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" remarks="MCA9IGZhbHNlCjEgPSB0cnVl"/>
+      <column name="courses_ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="ID"/>
+      <foreign-key name="fk_books_courses1" columns="courses_ID" ref-table="courses" ref-schema="" ref-catalog="cmp" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_books_courses1_idx" unique="false" columns="courses_ID"/>
+    </table>
+    <table name="course_equivalence" schema="" catalog="cmp" type="TABLE">
+      <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="course_equivalence_course_number" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="course_equivalence_name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="course_equivalence_description" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="ID"/>
+      <exported-key name="fk_courses_has_course_equivalence_course_equivalence1" table="courses_has_course_equivalence" schema="" catalog="cmp" columns="course_equivalence_ID"/>
+    </table>
+    <table name="course_prerequisites" schema="" catalog="cmp" type="TABLE">
+      <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="course_prerequisites_course_number" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="courses_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="programs_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="ID"/>
+      <foreign-key name="course_prerequisites_ibfk_1" columns="courses_id,programs_id" ref-table="programs_has_courses" ref-schema="" ref-catalog="cmp" ref-columns="courses_id,programs_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="courses_id" unique="false" columns="courses_id,programs_id"/>
+    </table>
+    <table name="courses" schema="" catalog="cmp" type="TABLE">
+      <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="course_number" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="course_name" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="course_description" sqlType="VARCHAR" precision="1500" scale="0" nullable="true" jdbcType="12"/>
+      <column name="course_level" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="course_hours_lab" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="course_hours_lecture" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="course_hours_study" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="course_hybrid" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" remarks="MCA9IGZhbHNlCjEgPSB0cnVl"/>
+      <primary-key name="PRIMARY" columns="ID"/>
+      <exported-key name="fk_books_courses1" table="books" schema="" catalog="cmp" columns="courses_ID"/>
+      <exported-key name="fk_courses_has_course_equivalence_courses1" table="courses_has_course_equivalence" schema="" catalog="cmp" columns="courses_ID"/>
+      <exported-key name="fk_courses_has_professors_courses1" table="courses_has_professors" schema="" catalog="cmp" columns="courses_ID"/>
+      <exported-key name="programs_has_courses_ibfk_2" table="programs_has_courses" schema="" catalog="cmp" columns="courses_id"/>
+      <exported-key name="fk_student_courses_courses1" table="student_courses" schema="" catalog="cmp" columns="courses_ID"/>
+      <exported-key name="fk_student_grades_courses1" table="student_grades" schema="" catalog="cmp" columns="courses_ID"/>
+    </table>
+    <table name="courses_has_course_equivalence" schema="" catalog="cmp" type="TABLE">
+      <column name="courses_ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="course_equivalence_ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="courses_ID,course_equivalence_ID"/>
+      <foreign-key name="fk_courses_has_course_equivalence_course_equivalence1" columns="course_equivalence_ID" ref-table="course_equivalence" ref-schema="" ref-catalog="cmp" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_courses_has_course_equivalence_courses1" columns="courses_ID" ref-table="courses" ref-schema="" ref-catalog="cmp" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_courses_has_course_equivalence_course_equivalence1_idx" unique="false" columns="course_equivalence_ID"/>
+      <index name="fk_courses_has_course_equivalence_courses1_idx" unique="false" columns="courses_ID"/>
+    </table>
+    <table name="courses_has_professors" schema="" catalog="cmp" type="TABLE">
+      <column name="courses_ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="professors_ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="courses_ID,professors_ID"/>
+      <foreign-key name="fk_courses_has_professors_courses1" columns="courses_ID" ref-table="courses" ref-schema="" ref-catalog="cmp" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_courses_has_professors_professors1" columns="professors_ID" ref-table="professors" ref-schema="" ref-catalog="cmp" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_courses_has_professors_courses1_idx" unique="false" columns="courses_ID"/>
+      <index name="fk_courses_has_professors_professors1_idx" unique="false" columns="professors_ID"/>
+    </table>
+    <table name="professors" schema="" catalog="cmp" type="TABLE">
+      <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="professor_fname" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="professor_lname" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="professor_email" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="professor_phone" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="ID"/>
+      <exported-key name="fk_courses_has_professors_professors1" table="courses_has_professors" schema="" catalog="cmp" columns="professors_ID"/>
+    </table>
+    <table name="programs" schema="" catalog="cmp" type="TABLE">
+      <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="program_name" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="program_code" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="program_version" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" remarks="UHJvZ3JhbSBZZWFy"/>
+      <column name="program_flowchart" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="program_year" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="ID"/>
+      <exported-key name="programs_has_courses_ibfk_1" table="programs_has_courses" schema="" catalog="cmp" columns="programs_id"/>
+      <exported-key name="students_ibfk_2" table="students" schema="" catalog="cmp" columns="programs_id"/>
+      <exported-key name="fk_users_has_programs_programs1" table="users_has_programs" schema="" catalog="cmp" columns="programs_ID"/>
+    </table>
+    <table name="programs_has_courses" schema="" catalog="cmp" type="TABLE">
+      <column name="programs_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="courses_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="programs_id,courses_id"/>
+      <foreign-key name="programs_has_courses_ibfk_1" columns="programs_id" ref-table="programs" ref-schema="" ref-catalog="cmp" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="programs_has_courses_ibfk_2" columns="courses_id" ref-table="courses" ref-schema="" ref-catalog="cmp" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="course_prerequisites_ibfk_1" table="course_prerequisites" schema="" catalog="cmp" columns="courses_id,programs_id"/>
+    </table>
+    <table name="student_courses" schema="" catalog="cmp" type="TABLE">
+      <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="student_courses_semester" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="courses_ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="students_ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="students_student_number" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="ID"/>
+      <foreign-key name="fk_student_courses_courses1" columns="courses_ID" ref-table="courses" ref-schema="" ref-catalog="cmp" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_student_courses_students1" columns="students_ID,students_student_number" ref-table="students" ref-schema="" ref-catalog="cmp" ref-columns="ID,student_number" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_student_courses_courses1_idx" unique="false" columns="courses_ID"/>
+      <index name="fk_student_courses_students1_idx" unique="false" columns="students_ID,students_student_number"/>
+    </table>
+    <table name="student_grades" schema="" catalog="cmp" type="TABLE">
+      <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="letter_grade" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="numeric_grade" sqlType="FLOAT" precision="12" scale="0" nullable="true" jdbcType="7"/>
+      <column name="courses_ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="students_ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="students_student_number" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="ID"/>
+      <foreign-key name="fk_student_grades_courses1" columns="courses_ID" ref-table="courses" ref-schema="" ref-catalog="cmp" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_student_grades_students1" columns="students_ID,students_student_number" ref-table="students" ref-schema="" ref-catalog="cmp" ref-columns="ID,student_number" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_student_grades_courses1_idx" unique="false" columns="courses_ID"/>
+      <index name="fk_student_grades_students1_idx" unique="false" columns="students_ID,students_student_number"/>
+    </table>
+    <table name="students" schema="" catalog="cmp" type="TABLE">
+      <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="student_number" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="student_fname" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="student_lname" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="student_email" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="student_phone" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Archived_date" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="graduating_year" sqlType="YEAR" precision="0" scale="0" nullable="true" jdbcType="91"/>
+      <column name="programs_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="ID,student_number"/>
+      <foreign-key name="students_ibfk_2" columns="programs_id" ref-table="programs" ref-schema="" ref-catalog="cmp" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_student_courses_students1" table="student_courses" schema="" catalog="cmp" columns="students_ID,students_student_number"/>
+      <exported-key name="fk_student_grades_students1" table="student_grades" schema="" catalog="cmp" columns="students_ID,students_student_number"/>
+    </table>
+    <table name="users" schema="" catalog="cmp" type="TABLE">
+      <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="user_login" sqlType="VARCHAR" precision="60" scale="0" nullable="false" jdbcType="12"/>
+      <column name="user_pass" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="user_fname" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="user_lname" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="user_email" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="user_role" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" remarks="VXNlciByb2xlIGFzIGludCBmb3Igc2ltcGxlIGNoZWNrczoKMTAgPSBjb29yZGluYXRvcgo5ID0gYXNzaXN0YW50IAo4ID0gcHJvZmVzc29y"/>
+      <primary-key name="PRIMARY" columns="ID"/>
+      <exported-key name="fk_users_has_programs_users1" table="users_has_programs" schema="" catalog="cmp" columns="users_ID"/>
+      <index name="user_login_UNIQUE" unique="true" columns="user_login"/>
+    </table>
+    <table name="users_has_programs" schema="" catalog="cmp" type="TABLE">
+      <column name="users_ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="programs_ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="users_ID,programs_ID"/>
+      <foreign-key name="fk_users_has_programs_programs1" columns="programs_ID" ref-table="programs" ref-schema="" ref-catalog="cmp" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_users_has_programs_users1" columns="users_ID" ref-table="users" ref-schema="" ref-catalog="cmp" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_users_has_programs_programs1_idx" unique="false" columns="programs_ID"/>
+      <index name="fk_users_has_programs_users1_idx" unique="false" columns="users_ID"/>
+    </table>
+  </data-source>
+</component>

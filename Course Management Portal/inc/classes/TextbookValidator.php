@@ -19,7 +19,10 @@ class TextbookValidator extends Validator
      * accessible to the current user.
      * */
     protected static $roles = array(
-        //Role 10 = Administrator
+    //Role 11 = Superuser
+    11 => array("book_title", "book_isbn", "book_edition", "book_author", "book_publisher", 
+        "book_type", "book_required", "book_quantity"),
+    //Role 10 = Administrator
 	10 => array("book_title", "book_isbn", "book_edition", "book_author", "book_publisher", 
 		"book_type", "book_required", "book_quantity"),
         //Role 9 = Administrator's Assistant
