@@ -117,10 +117,10 @@ class HTMLReportGenerator
                         {
                             ?>
                             <tr>
-                                <td><?php echo $student->student_lname . ',' . student_fname?></td>
-                                <td><?php echo $student->student_number?></td>
-                                <td><?php echo $student->course?></td>
-                            </tr>
+<!--                                <td>--><?php //echo $student->student_lname . ',' . student_fname?><!--</td>-->
+<!--                                <td>--><?php //echo $student->student_number?><!--</td>-->
+<!--                                <td>--><?php //echo $student->course?><!--</td>-->
+                          </tr>
                         <?php }
                     }?>
 

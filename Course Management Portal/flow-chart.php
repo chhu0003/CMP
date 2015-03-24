@@ -45,7 +45,7 @@ if( !$session->is_logged_in() ) {
 		<?php if( isset( $_SESSION[ 'user_role' ] ) && $_SESSION[ 'user_role' ] > 8 ) {//coordinator or assistant ?>
 			<li><a href="#" class="flow-chart-btn" onclick="openWindow('manage-course.php?course_ID=0')">Manage
 					Courses</a></li>
-            <li><a href="#" class="flow-chart-btn" onclick="openWindow('manage-cstudent.php?course_ID=0')">Manage
+            <li><a href="#" class="flow-chart-btn" onclick="openWindow('manage-student.php?course_ID=0')">Manage
                     Students</a</li>
 		<?php if( isset( $_SESSION[ 'user_role' ] ) && $_SESSION[ 'user_role' ] > 9 ) {//coordinator?>
 			<li><a href="#" class="flow-chart-btn" onclick="openWindow('manage-users.php')">Manage Users</a></li>

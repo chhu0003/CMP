@@ -18,7 +18,10 @@ class UserValidator extends Validator
      * accessible to the current user.
      * */
     protected static $roles = array(
-        //Role 10 = Administrator
+    //Role 11 = Superuser
+    11 => array("user_login", "user_pass", "user_fname", "user_lname", "user_email", 
+        "user_role"),
+    //Role 10 = Administrator
 	10 => array("user_login", "user_pass", "user_fname", "user_lname", "user_email", 
 		"user_role"),
         //Role 9 = Administrator's Assistant

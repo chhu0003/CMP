@@ -17,6 +17,10 @@ class CourseValidator extends Validator
      * accessible to the current user.
      * */
 protected static $roles = array(
+    //Role 11 = Administrator
+    11 => array("course_number", "course_name", "course_description", "course_level",
+    "course_hours_lab", "course_hours_lecture", "course_hours_study", "course_hybrid", 
+    ),
     //Role 10 = Administrator
 	10 => array("course_number", "course_name", "course_description", "course_level",
 	"course_hours_lab", "course_hours_lecture", "course_hours_study", "course_hybrid", 
