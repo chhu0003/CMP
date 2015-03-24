@@ -39,6 +39,41 @@ class Program extends MySQLDB
 
 	public function __construct() { }
 
+    public static function find_by_program_ID( $ID )
+    {
+
+        $find_by_program_ID_sql = "SELECT * FROM " . self::$table_name . " WHERE ID='$ID'";
+
+        //query the database with the user_login
+        $result_array = parent::find_by_sql( $find_by_program_ID_sql );
+
+        //if the $result_array isn't empty use array_shift() so that only the user object inside the array is
+        //returned. Otherwise, return false so that we know the user wasn't found
+        return !empty( $result_array ) ? array_shift( $result_array ) : false;
+    }
+
+    //used in manage_users
+    public static function find_user_program( $userID )
+    {
+        $selectPrograms = "";
+        if ($userID > 0)
+        {
+            $selectPrograms = "SELECT programs.ID, programs.program_name, programs.program_year FROM programs where programs.ID Not in (SELECT programs_ID FROM users_has_programs WHERE users_has_programs.users_ID=$userID) order by programs.program_name, programs.program_year";
+
+        }else{
+            $selectPrograms = "SELECT programs.ID, programs.program_name, programs.program_year FROM programs order by programs.program_name, programs.program_year";
+        }
+        //return the results as a program object
+        return self::find_by_sql( $selectPrograms );
+    }
+
+    //Used in manage_users
+    public static function find_selected_user_program( $userID )
+    {
+        $selectPrograms = "SELECT programs.ID, programs.program_name, programs.program_year FROM programs, users_has_programs WHERE users_has_programs.users_ID=$userID and users_has_programs.programs_id = programs.ID";
+        //return the results as a program object
+        return self::find_by_sql( $selectPrograms );
+    }
 	/**
 	 * @param $program_name
 	 *
@@ -122,5 +157,62 @@ class Program extends MySQLDB
 
         return self::find_by_sql( $find_distinct_program_sql );
 
+    }
+}
+/**
+ * Class UserPrograms
+ *
+ * CRUD for user_has_programs -> CRUD is inherited from MySQLDB
+ *
+ */
+class UserProgram extends Program
+{
+    protected static $table_name = "users_has_programs";
+
+    protected static $database_fields = array(
+        'users_id',
+        'programs_ID',
+    );
+
+    public $users_id;
+    public $programs_ID;
+
+    public static function find_by_userPrograms_ID( $ID )
+    {
+
+        $find_by_user_ID_sql = "SELECT * FROM " . self::$table_name . " WHERE USERS_ID='$ID'";
+
+        //query the database with the user_login
+        $result_array = parent::find_by_sql( $find_by_user_ID_sql );
+
+        //if the $result_array isn't empty use array_shift() so that only the user object inside the array is
+        //returned. Otherwise, return false so that we know the user wasn't found
+        return !empty( $result_array ) ? array_shift( $result_array ) : false;
+    }
+}
+
+class ProgramCourses extends Program
+{
+    protected static $table_name = "programs_has_courses";
+
+    protected static $database_fields = array(
+        'courses_id',
+        'programs_id',
+    );
+
+    public $courses_id;
+    public $programs_id;
+
+    public static function find_by_programCourses_ID( $ID )
+    {
+
+        $find_by_program_ID_sql = "SELECT * FROM " . self::$table_name . " WHERE PROGRAMS_ID='$ID'";
+
+        //query the database with the user_login
+        $result_array = parent::find_by_sql( $find_by_program_ID_sql );
+
+        //if the $result_array isn't empty use array_shift() so that only the user object inside the array is
+        //returned. Otherwise, return false so that we know the user wasn't found
+        return !empty( $result_array ) ? array_shift( $result_array ) : false;
     }
 }

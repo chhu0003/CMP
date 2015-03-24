@@ -4,6 +4,11 @@ require_once( dirname( __FILE__ ) . '/header.php' );
 $report = new HTMLReportGenerator();
 ?>
 <?php
+if(isset ($_GET["GraduatedStudentReport"])){
+
+}
+
+
 if(isset ($_GET["reportName"])) {
     // TODO add dropdown list for program and year to appear after user clicks on report type. one div for dropdowns
     // and generate report button
