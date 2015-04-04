@@ -25,6 +25,7 @@ class Student extends MySQLDB
 		'student_email',
 		'student_phone',
         'graduated',
+		'programs_id'
 	);
 
 	public $ID;
@@ -34,11 +35,19 @@ class Student extends MySQLDB
 	public $student_email;
 	public $student_phone;
     public $graduated;
+	public $programs_id;
 
 	public function __construct()
 	{
 	}
+	public static function find_id_by_student_number( $student_number )
+	{
 
+		$find_by_student_number_sql = "SELECT ID, student_number FROM " . self::$table_name . " WHERE student_number='$student_number'";
+
+		//return the students id
+		return self::find_by_sql( $find_by_student_number_sql );
+	}
 	/**
 	 * @param $student_number
 	 *
@@ -94,8 +103,17 @@ class Student extends MySQLDB
 		}
 
 	}
+	public static function count_students( )
+	{
 
-    /**
+		$count_students_sql = "SELECT * FROM students";
+
+		$count_students = parent::find_by_sql( $count_students_sql );
+
+		return count( $count_students );
+
+	}
+/**
      * @param $year
      * @param $programID
      * @return bool|mixed
@@ -259,6 +277,8 @@ class StudentCourse extends Student
 		return self::find_by_sql( $find_by_student_number_sql );
 
 	}
+
+
 
 	/**
 	 * @param $student_number
