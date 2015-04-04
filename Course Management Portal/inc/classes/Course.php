@@ -50,6 +50,20 @@ class Course extends MySQLDB
 	 *
 	 * @return bool|mixed
 	 */
+	public static function get_id_by_course_number( $course_number )
+	{
+
+		$find_course_by_course_number_sql = "SELECT ID, course_number FROM " . self::$table_name . " WHERE course_number='$course_number'";
+
+		//query the database with the user_login
+		$result_array = parent::find_by_sql( $find_course_by_course_number_sql );
+
+		//if the $result_array isn't empty use array_shift() so that only the course object inside the array is
+		//returned. Otherwise, return false so that we know the user wasn't found
+		return !empty( $result_array ) ? array_shift( $result_array ) : false;
+
+
+	}
 	public static function find_by_course_number( $course_number )
 	{
 
@@ -123,27 +137,6 @@ class Course extends MySQLDB
 
 	}
 
-	public static function find_course_program( $programID )
-	{
-		$selectCourses = "";
-		if ($programID > 0)
-		{
-			$selectCourses = "SELECT courses.ID, courses.course_number, courses.course_name FROM courses where courses.ID Not in (SELECT programs_has_courses.courses_id FROM programs_has_courses WHERE programs_has_courses.programs_id=$programID) order by courses.course_number"; 
-		}else{
-			$selectCourses = "SELECT courses.ID, courses.course_number, courses.course_name FROM courses order by courses.course_number"; 
-		}
-
-		//return the results as a course object
-		return self::find_by_sql( $selectCourses );
-	}
-
-	public static function find_selected_course_program( $programID )
-	{
-		$selectCourses = "SELECT courses.ID, courses.course_number, courses.course_name FROM courses, programs_has_courses WHERE courses.ID = programs_has_courses.courses_id and programs_has_courses.programs_id = $programID"; 
-
-		//return the results as a course object
-		return self::find_by_sql( $selectCourses );
-	}
 }
 
 
@@ -161,13 +154,11 @@ class CoursePrerequisite extends Course
 	protected static $database_fields = array(
 		'ID',
 		'course_prerequisites_course_number',
-		'programs_ID',
 		'courses_ID',
 	);
 
 	public $ID;
 	public $course_prerequisites_course_number;
-	public $programs_ID;
 	public $courses_ID;
 
 	/**
@@ -175,11 +166,11 @@ class CoursePrerequisite extends Course
 	 *
 	 * @return array of all prerequisites
 	 */
-	public static function find_by_course_ID( $programs_ID, $ID )
+	public static function find_by_course_ID( $ID )
 	{
 
 		$find_by_course_ID_sql = "SELECT course_prerequisites.ID, course_prerequisites.courses_ID, courses.course_number, courses.course_name, courses.course_description, courses.course_level, courses.course_hours_lab, courses.course_hours_lecture, courses.course_hours_study, courses.course_hybrid ";
-		$find_by_course_ID_sql .= " FROM courses, course_prerequisites WHERE course_prerequisites.programs_ID = " . $programs_ID . " AND course_prerequisites.courses_ID = ";
+		$find_by_course_ID_sql .= " FROM courses, course_prerequisites WHERE course_prerequisites.courses_ID = ";
 		$find_by_course_ID_sql .= $ID . " AND course_prerequisites.course_prerequisites_course_number = courses.course_number";
 
 		//return the results as a course object
@@ -194,11 +185,11 @@ class CoursePrerequisite extends Course
 	 *
 	 * @return array
 	 */
-	public static function find_by_course_ID_and_course_prerequisite_course_number( $programs_ID, $courses_ID, $course_prerequisites_course_number )
+	public static function find_by_course_ID_and_course_prerequisite_course_number( $courses_ID, $course_prerequisites_course_number )
 	{
 
 		$find_by_course_ID_sql = "SELECT course_prerequisites.ID, course_prerequisites.courses_ID, courses.course_number, courses.course_name, courses.course_description, courses.course_level, courses.course_hours_lab, courses.course_hours_lecture, courses.course_hours_study, courses.course_hybrid ";
-		$find_by_course_ID_sql .= " FROM courses, course_prerequisites WHERE course_prerequisites.programs_ID = " . $programs_ID . " AND course_prerequisites.courses_ID = ";
+		$find_by_course_ID_sql .= " FROM courses, course_prerequisites WHERE course_prerequisites.courses_ID = ";
 		$find_by_course_ID_sql .= $courses_ID . " AND course_prerequisites.course_prerequisites_course_number = '" . $course_prerequisites_course_number . "'";
 
 		//return the results as a course object
