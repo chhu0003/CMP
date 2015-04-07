@@ -24,7 +24,9 @@ class Student extends MySQLDB
 		'student_lname',
 		'student_email',
 		'student_phone',
-        'graduated',
+		'programs_id',
+		//temp commented out
+        //'graduated',
 	);
 
 	public $ID;
@@ -33,6 +35,7 @@ class Student extends MySQLDB
 	public $student_lname;
 	public $student_email;
 	public $student_phone;
+	public $programs_id;
     public $graduated;
 
 	public function __construct()
