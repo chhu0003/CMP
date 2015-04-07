@@ -125,27 +125,7 @@ class Course extends MySQLDB
 
 	}
 
-	public static function find_course_program( $programID )
-	{
-		$selectCourses = "";
-		if ($programID > 0)
-		{
-			$selectCourses = "SELECT courses.ID, courses.course_number, courses.course_name FROM courses where courses.ID Not in (SELECT programs_has_courses.courses_id FROM programs_has_courses WHERE programs_has_courses.programs_id=$programID) order by courses.course_number"; 
-		}else{
-			$selectCourses = "SELECT courses.ID, courses.course_number, courses.course_name FROM courses order by courses.course_number"; 
-		}
-
-		//return the results as a course object
-		return self::find_by_sql( $selectCourses );
-	}
-
-	public static function find_selected_course_program( $programID )
-	{
-		$selectCourses = "SELECT courses.ID, courses.course_number, courses.course_name FROM courses, programs_has_courses WHERE courses.ID = programs_has_courses.courses_id and programs_has_courses.programs_id = $programID"; 
-
-		//return the results as a course object
-		return self::find_by_sql( $selectCourses );
-	}
+	
 	public static function find_course_program( $programID )
 	{
 		$selectCourses = "";

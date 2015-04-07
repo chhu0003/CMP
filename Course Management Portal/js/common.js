@@ -421,5 +421,24 @@ function moveSelectedPrograms(from, to, toSelect) {
     } 
 }
 
+function addColor(courseId,grade)
+{
+	if(grade=='F')
+	{
+	document.getElementById(courseId).style.backgroundColor="red";
+	}
+	else if(grade=="")
+	{
+	document.getElementById(courseId).style.backgroundColor="white";
+	}
+	else 
+	{
+		document.getElementById(courseId).style.backgroundColor="green";
+	}
+}
+
+function displayProgramName(programName){
+	document.getElementById('programName').innerHTML=programName;
+}
 
 

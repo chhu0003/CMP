@@ -70,7 +70,7 @@ class Program extends MySQLDB
     //Used in manage_users
     public static function find_selected_user_program( $userID )
     {
-        $selectPrograms = "SELECT programs.ID, programs.program_name, programs.program_year FROM programs, users_has_programs WHERE users_has_programs.users_ID=$userID and users_has_programs.programs_id = programs.ID";
+        $selectPrograms = "SELECT programs.ID, programs.program_name, programs.program_year,programs.program_code FROM programs, users_has_programs WHERE users_has_programs.users_ID=$userID and users_has_programs.programs_id = programs.ID";
         //return the results as a program object
         return self::find_by_sql( $selectPrograms );
     }

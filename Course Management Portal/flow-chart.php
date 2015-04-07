@@ -180,10 +180,10 @@ if( !$session->is_logged_in() ) {
 			}
 
 			//get a count of how many courses are in this level
-			$coursesInThisLevel = Course::count_by_course_level( $course->course_level );
+			$coursesInThisLevel = Course::count_by_course_level( $course->course_level, $program_id );
 
 			//get the current courses prerequisites
-			$prerequisites = CoursePrerequisite::find_by_course_ID( $course->ID );
+			$prerequisites = CoursePrerequisite::find_by_course_ID( $course->ID, $program_id );
 
 			//if this is a new level
 			if( $newLevel ) { //start a new level-container
