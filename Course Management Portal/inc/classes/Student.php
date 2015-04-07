@@ -25,8 +25,7 @@ class Student extends MySQLDB
 		'student_email',
 		'student_phone',
 		'programs_id',
-		//temp commented out
-        //'graduated',
+		'graduating_year',
 	);
 
 	public $ID;
@@ -36,7 +35,7 @@ class Student extends MySQLDB
 	public $student_email;
 	public $student_phone;
 	public $programs_id;
-    public $graduated;
+    public $graduating_year;
 
 	public function __construct()
 	{
@@ -47,6 +46,35 @@ class Student extends MySQLDB
 	 *
 	 * @return bool|mixed
 	 */
+	 //Added by JM
+	public static function archive_date( $student_number)
+	{
+		global $database;
+		
+		$now = date("Y-m-d");	
+		$archive_date_sql = "update Students set archived_date = '$now' where student_number = $student_number";	
+		$database->query($archive_date_sql);
+
+		//return true if the update was successful
+		return ( $database->affected_rows() == 1 ) ? true : false;
+	}
+	
+	
+	//Added by JM
+	public static function get_student_courses_and_grades( $student_ID )
+	{
+
+		$get_student_courses_and_grades_sql = 
+			"SELECT course_name,letter_grade, student_grades.id FROM student_grades,courses WHERE courses.id=courses_ID AND students_student_number=$student_ID";
+
+		//query the database with the user_login
+		$result_array = parent::find_by_sql( $get_student_courses_and_grades_sql );
+
+		//if the $result_array isn't empty use array_shift() so that only the course object inside the array is
+		//returned. Otherwise, return false so that we know the user wasn't found
+		return !empty( $result_array ) ? array_shift( $result_array ) : false;
+	} 
+	
     //function used in uploadcsv created by Terry
     public static function find_id_by_student_number( $student_number )
 	{
@@ -210,6 +238,12 @@ class StudentGrade extends Student
 	 *
 	 * @return bool|mixed
 	 */
+	//Added by JM
+	public static function find_by_letter_grade($student_ID)
+	{
+		$find_by_letter_grade_sql = "SELECT * FROM " . self::$table_name . " WHERE students_student_number='$student_number'";
+	}
+	
 	public static function find_by_student_number( $student_number )
 	{
 

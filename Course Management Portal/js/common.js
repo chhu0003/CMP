@@ -114,7 +114,37 @@ function getResultsFromFlowChartSearch(searchString)
     xmlhttp.open("GET","inc/ajax_files/flowchart-search-results.php?search="+searchString,true);
     xmlhttp.send();
 }
-
+// new method added by JM
+function getResultsFromEditStudentSearch(searchString)
+{
+        if (searchString.length==0)
+    {
+        document.getElementById("flowchart-search-results").innerHTML="";
+        document.getElementById("flowchart-search-results").style.border="0px";
+        document.getElementById("flowchart-search-results").style.display="none";
+        return;
+    }
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange=function()
+    {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+        {
+            document.getElementById("flowchart-search-results").innerHTML=xmlhttp.responseText;
+            document.getElementById("flowchart-search-results").style.border="1px solid #A5ACB2";
+            document.getElementById("flowchart-search-results").style.display="block";
+        }
+    }
+	//xmlhttp.open("GET","inc/ajax_files/edit-student.php?search="+searchString,true);
+    xmlhttp.open("GET","inc/ajax_files/edit-student-search-results.php?search="+searchString,true);
+    xmlhttp.send();
+}
 
 //END flow chart page
 
