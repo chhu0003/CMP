@@ -44,6 +44,16 @@ class Student extends MySQLDB
 	 *
 	 * @return bool|mixed
 	 */
+    //function used in uploadcsv created by Terry
+    public static function find_id_by_student_number( $student_number )
+	{
+
+		$find_by_student_number_sql = "SELECT ID, student_number FROM " . self::$table_name . " WHERE student_number='$student_number'";
+
+		//return the students id
+		return self::find_by_sql( $find_by_student_number_sql );
+	}
+    
 	public static function find_by_student_number( $student_number )
 	{
 
@@ -101,6 +111,17 @@ class Student extends MySQLDB
 			return "";
 
 		}
+
+	}
+    //function used for upload csv.  created by Terry
+    public static function count_students( )
+	{
+
+		$count_students_sql = "SELECT * FROM students";
+
+		$count_students = parent::find_by_sql( $count_students_sql );
+
+		return count( $count_students );
 
 	}
 
