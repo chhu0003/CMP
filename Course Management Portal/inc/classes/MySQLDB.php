@@ -491,6 +491,37 @@ class MySQLDB
 
 
 	}
+    //custom function for upload csv by Terry
+    public function create1()
+	{
+
+		global $database;
+
+		//get the sanitized attributes
+		$attributes = $this->sanitized_attributes();
+
+		$create_sql = "INSERT INTO " . static::$table_name . " (";
+		$create_sql .= join( ", ", array_keys( $attributes ) );
+		$create_sql .= ") VALUES ('";
+		$create_sql .= join( "', '", array_values( $attributes ) );
+		$create_sql .= "')";
+
+		if( $database->query( $create_sql ) ) {
+
+			//get the id that was auto incremented
+			$this->ID = $database->insert_id();
+
+			return true;
+
+		} else {
+
+			return false;
+
+		}
+
+
+	}
+
 
 
 	/**
