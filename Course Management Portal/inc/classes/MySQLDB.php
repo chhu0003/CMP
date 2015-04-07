@@ -521,6 +521,42 @@ class MySQLDB
 
 
 	}
+	
+	public function editStudent_courseGrade($studentNum, $studentFname, $studentLname, $studentPhone, $studentEmail, $studentGrade, 			$studentGraduYear, $courseGradeID)
+	{
+	global $database;
+		
+		$editStudent_courseGrade_sql  = "UPDATE students ";
+		$editStudent_courseGrade_sql .= "SET graduating_year = $studentGraduYear, ";
+		$editStudent_courseGrade_sql .= "student_email = '$studentEmail', ";
+		$editStudent_courseGrade_sql .= "student_phone = $studentPhone, ";
+		$editStudent_courseGrade_sql .= "student_fname = '$studentFname', ";
+		$editStudent_courseGrade_sql .= "student_lname = '$studentLname' ";
+		$editStudent_courseGrade_sql .= "WHERE student_number = $studentNum; ";
+		$editStudent_courseGrade_sql2 = "UPDATE student_grades ";
+		$editStudent_courseGrade_sql2 .= "SET letter_grade = '$studentGrade' ";
+		$editStudent_courseGrade_sql2 .= "WHERE courses_id = $courseGradeID;";
+		
+		// use a boolean to be altered after each database transaction, do {} while true
+		//run the query
+
+		
+		$database->query( $editStudent_courseGrade_sql );
+		$counter = $database->affected_rows();
+		
+		echo $courseGradeID;
+		if (strlen($courseGradeID) == 0 || $courseGradeID == 0 || !isset($courseGradeID) || trim($courseGradeID)==='')
+		{
+			return ( $counter == 5 ) ? true : false;
+		}
+		
+		$database->query( $editStudent_courseGrade_sql2 );
+		$counter = $counter + $database->affected_rows();
+
+		//return true if the update was successful
+		return ( $counter == 6 ) ? true : false;
+		
+	}
 
 
 

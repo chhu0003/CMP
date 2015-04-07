@@ -101,7 +101,7 @@ $students1 = Student::find_by_student_number($_GET[ 'student_ID' ]);
 	}*/
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-<script src="js/common.js"></script>
+<script src="../../Course Management Portal/js/common.js"></script>
 
 <!--<body onresize="window.location.reload(false);">-->
 
@@ -157,7 +157,7 @@ $students1 = Student::find_by_student_number($_GET[ 'student_ID' ]);
 		//var_dump($studentCoursesGrades);
 		foreach( $studentCoursesGrades as $courseListGrade ) {
   // echo $courseListGrade->courses_ID;
-  $courseList=Course::find_by_course_id($courseListGrade->courses_ID);
+  $courseList=Course::find_by_course_list($courseListGrade->courses_ID);
   $studentGrad= StudentGrade::find_by_student_number_and_course_ID($_GET['student_ID'],$courseListGrade->courses_ID);
 		echo "<option label='$courseListGrade->courses_ID' value='$studentGrad->letter_grade' >". $courseList->course_name ." : ".strtoupper($studentGrad->letter_grade)."</option>";  
 		}

@@ -45,17 +45,38 @@ class Course extends MySQLDB
 
 	public function __construct() { }
 
+
+	public static function get_student_courses_and_grades( $student_num )
+	{
+
+$get_student_courses_and_grades_sql = 
+			"SELECT course_name,letter_grade FROM student_grades,courses WHERE courses.id=courses_ID AND students_student_number=$student_num";
+				
+				
+				/*SELECT c.course_name as CourseName, g.letter_grade as Grade 
+				FROM courses c 
+				LEFT JOIN student_courses sc
+				ON c.id = sc.courses_id
+				LEFT JOIN student_grades g
+				ON g.courses_id = sc.courses_id
+				WHERE sc.students_student_number=111111112 GRoUP BY c.course_name
+*/		//query the database with the user_login
+		$result_array = parent::find_by_sql( $get_student_courses_and_grades_sql );
+   
+		//if the $result_array isn't empty use array_shift() so that only the course object inside the array is
+		//returned. Otherwise, return false so that we know the user wasn't found
+		return !empty( $result_array ) ? array_shift( $result_array ) : false;
+	} 
+
 	/**
 	 * @param $course_number
 	 *
 	 * @return bool|mixed
 	 */
-    
-    //function added by Terry
-    public static function get_id_by_course_number( $course_number )
+	public static function find_by_course_number( $course_number )
 	{
 
-		$find_course_by_course_number_sql = "SELECT ID, course_number FROM " . self::$table_name . " WHERE course_number='$course_number'";
+		$find_course_by_course_number_sql = "SELECT * FROM " . self::$table_name . " WHERE course_number='$course_number'";
 
 		//query the database with the user_login
 		$result_array = parent::find_by_sql( $find_course_by_course_number_sql );
@@ -66,10 +87,15 @@ class Course extends MySQLDB
 
 
 	}
-	public static function find_by_course_number( $course_number )
+/**
+	 * @param $course_number
+	 *
+	 * @return bool|mixed
+	 */
+	public static function find_by_course_list( $course_id )
 	{
 
-		$find_course_by_course_number_sql = "SELECT * FROM " . self::$table_name . " WHERE course_number='$course_number'";
+		$find_course_by_course_number_sql = "SELECT * FROM " . self::$table_name . " WHERE id=$course_id";
 
 		//query the database with the user_login
 		$result_array = parent::find_by_sql( $find_course_by_course_number_sql );
@@ -86,10 +112,10 @@ class Course extends MySQLDB
 	 *
 	 * @return array
 	 */
-	public static function find_by_course_level( $courseLevel, $program_id )
+	public static function find_by_course_level( $courseLevel )
 	{
 
-		$find_by_course_level_sql = "SELECT * from " . self::$table_name . ", programs_has_courses WHERE id=courses_id and course_level =" . $courseLevel ." and programs_id=".$program_id;
+		$find_by_course_level_sql = "SELECT * from " . self::$table_name . " WHERE course_level =" . $courseLevel;
 
 		return self::find_by_sql( $find_by_course_level_sql );
 
@@ -100,18 +126,16 @@ class Course extends MySQLDB
 	 *
 	 * @return int
 	 */
-	public static function count_by_course_level( $course_level, $program_id )
+	public static function count_by_course_level( $course_level )
 	{
 
-		$count_by_course_level_sql = "SELECT * FROM courses, programs_has_courses WHERE id=courses_id AND course_level =" . $course_level ." and programs_id=".$program_id;
+		$count_by_course_level_sql = "SELECT * FROM courses WHERE course_level =" . $course_level;
 
 		$coursesInThisLevel = parent::find_by_sql( $count_by_course_level_sql );
 
 		return count( $coursesInThisLevel );
 
 	}
-	
-	
 
 	/**
 	 * @return int
@@ -141,7 +165,6 @@ class Course extends MySQLDB
 
 	}
 
-	
 	public static function find_course_program( $programID )
 	{
 		$selectCourses = "";
@@ -194,13 +217,12 @@ class CoursePrerequisite extends Course
 	 *
 	 * @return array of all prerequisites
 	 */
-	public static function find_by_course_ID(  $ID, $program_ID )
+	public static function find_by_course_ID( $programs_ID, $ID )
 	{
 
 		$find_by_course_ID_sql = "SELECT course_prerequisites.ID, course_prerequisites.courses_ID, courses.course_number, courses.course_name, courses.course_description, courses.course_level, courses.course_hours_lab, courses.course_hours_lecture, courses.course_hours_study, courses.course_hybrid ";
-		$find_by_course_ID_sql .= " FROM courses, course_prerequisites WHERE course_prerequisites.courses_ID = ";
-		$find_by_course_ID_sql .= $ID . " AND course_prerequisites.course_prerequisites_course_number = courses.course_number AND course_prerequisites.programs_id=".$program_ID;
-   
+		$find_by_course_ID_sql .= " FROM courses, course_prerequisites WHERE course_prerequisites.programs_ID = " . $programs_ID . " AND course_prerequisites.courses_ID = ";
+		$find_by_course_ID_sql .= $ID . " AND course_prerequisites.course_prerequisites_course_number = courses.course_number";
 
 		//return the results as a course object
 		return self::find_by_sql( $find_by_course_ID_sql );
@@ -215,7 +237,8 @@ class CoursePrerequisite extends Course
 	 * @return array
 	 */
 	public static function find_by_course_ID_and_course_prerequisite_course_number( $programs_ID, $courses_ID, $course_prerequisites_course_number )
-{
+	{
+
 		$find_by_course_ID_sql = "SELECT course_prerequisites.ID, course_prerequisites.courses_ID, courses.course_number, courses.course_name, courses.course_description, courses.course_level, courses.course_hours_lab, courses.course_hours_lecture, courses.course_hours_study, courses.course_hybrid ";
 		$find_by_course_ID_sql .= " FROM courses, course_prerequisites WHERE course_prerequisites.programs_ID = " . $programs_ID . " AND course_prerequisites.courses_ID = ";
 		$find_by_course_ID_sql .= $courses_ID . " AND course_prerequisites.course_prerequisites_course_number = '" . $course_prerequisites_course_number . "'";
