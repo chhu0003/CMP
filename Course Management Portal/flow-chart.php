@@ -42,16 +42,22 @@ if( !$session->is_logged_in() ) {
 				<div id="flowchart-search-results"></div>
 			</form>
 		</li>
-		<?php 
-		if( isset( $_SESSION[ 'user_role' ] ) && $_SESSION[ 'user_role' ] > 8 ) {//coordinator or assistant ?>
-			<li><a href="#" class="flow-chart-btn" onclick="openWindow('manage-course.php?course_ID=0')">Add New
-					Course</a></li>
+		<?php if( isset( $_SESSION[ 'user_role' ] ) && $_SESSION[ 'user_role' ] > 8 ) {//coordinator or assistant ?>
+			<li><a href="#" class="flow-chart-btn" onclick="openWindow('manage-course.php?course_ID=0')">Manage
+					Courses</a></li>
+            <li><a href="#" class="flow-chart-btn" onclick="openWindow('manage-student.php?course_ID=0')">Manage
+                    Students</a></li>
 		<?php if( isset( $_SESSION[ 'user_role' ] ) && $_SESSION[ 'user_role' ] > 9 ) {//coordinator?>
 			<li><a href="#" class="flow-chart-btn" onclick="openWindow('manage-users.php')">Manage Users</a></li>
+                <li><a href="#" class="flow-chart-btn" onclick="openWindow('reports.php')">Reports</a></li>
+                <li><a href="#" class="flow-chart-btn" onclick="openWindow('uploadCSV.php')">Upload CSV</a></li>
 			<?php }//END coordinator ?>
 		<?php }//END coordinator or assistant ?>
+		<?php if( isset( $_SESSION[ 'user_role' ] ) && $_SESSION[ 'user_role' ] > 10 ) {//superuser?>
+				<li><a href="#" class="flow-chart-btn" onclick="openWindow('manage-programs.php')">Manage Programs</a></li>
+		<?php }//END superuser ?>
 		<li>
-			<form action="#" method="post"2><input type="submit" class="flow-chart-btn" name="logout" value="Logout">
+			<form action="#" method="post"><input type="submit" class="flow-chart-btn" name="logout" value="Logout">
 			</form>
 		</li>
 	</ul>
@@ -130,18 +136,15 @@ if( !$session->is_logged_in() ) {
                            
 								//display the selected program name
 								displayProgramName('<?php echo $programName ?>');
-
-							}, false);
+		}, false);
                             </script>
     <?php
 	 }
 	}
 	
-	 //var_dump($drpProgValue);
+
 	 
 	$numberOfLevels = Course::get_number_of_levels($program_id);
-	//echo $numberOfLevels;
-
 
 
 	//start with 0 courses displayed
@@ -151,18 +154,18 @@ if( !$session->is_logged_in() ) {
 	$courseLevel = 1;
 
 	for( $i = 0; $numberOfLevels > $i; $i++ ) {
-          $courseLevel = $i + 1;
+ 	 $courseLevel = $i + 1;
 		//start with a new level
 		$newLevel = true;
-      
+
 		//get all of the courses for the current level
-		$courses = Course::find_by_course_level( $courseLevel,  $program_id );
+		$courses = Course::find_by_course_level( $courseLevel, $program_id );
 
 		foreach( $courses as $course ) {
 
 			$studentHasGrade = false;
 			$studentsGrade   = "";
-            
+
 			//if the student number is set
 			if( isset( $_GET[ 'student_number' ] ) ) {
 
@@ -173,14 +176,14 @@ if( !$session->is_logged_in() ) {
 				if( $studentHasGrade )
 					$studentsGrade = $studentHasGrade->letter_grade;
 				//get the letter grade
-                   
+
 			}
 
 			//get a count of how many courses are in this level
-			$coursesInThisLevel = Course::count_by_course_level( $course->course_level, $program_id );
-            //echo $coursesInThisLevel;
+			$coursesInThisLevel = Course::count_by_course_level( $course->course_level );
+
 			//get the current courses prerequisites
-			$prerequisites = CoursePrerequisite::find_by_course_ID( $course->ID, $program_id);
+			$prerequisites = CoursePrerequisite::find_by_course_ID( $course->ID );
 
 			//if this is a new level
 			if( $newLevel ) { //start a new level-container
@@ -201,17 +204,13 @@ if( !$session->is_logged_in() ) {
 
 
 			?>
-            
 			<a href="#" id="<?php echo $course->course_number . '-' . ++$position; ?>"
 			   onclick="openWindow('manage-course.php?course_ID=<?php echo $course->ID; ?>')">
-               
-
-
 				<div class="box <?php isset( $_GET[ 'student_number' ] ) ? print( 'extended-box' ) : print( '' ); ?>"
 				     id="<?php echo $course->course_number; ?>">
 
 					<?php
-                        
+
 					foreach( $prerequisites as $prerequisite ) {
 
 						//if the course level is an even number
@@ -229,7 +228,7 @@ if( !$session->is_logged_in() ) {
 						<script>
 							//run after the page has finished loading
 							document.addEventListener('DOMContentLoaded', function () {
-                           
+
 								//find the prerequisites
 								findPrerequisites('<?php echo $prerequisite->course_number; ?>', '<?php echo $course->course_number; ?>', '<?php echo $lineColor; ?>', '<?php echo $lineSize; ?>', '<?php echo $courseLevelOffset; ?>');
 
@@ -249,11 +248,10 @@ if( !$session->is_logged_in() ) {
 					<p class="course-hybrid"><?php ( $course->course_hybrid == 1 ) ? print( "H" ) : ''; ?></p>
 
 					<?php if( isset( $_GET[ 'student_number' ] ) ) : ?>
-                            
+
 						<p class="course-student-grade">
-                        
 							Grade: <?php echo $studentHasGrade ? $studentsGrade : 'No Grade'; ?></p>
-                            <script>
+ 						<script>
 							//run after the page has finished loading
 							document.addEventListener('DOMContentLoaded', function () {
                            
@@ -262,8 +260,7 @@ if( !$session->is_logged_in() ) {
 
 							}, false);
                             </script>
-
-					<?php endif;  ?>
+					<?php endif; ?>
 
 				</div>
 				<!-- END .box #<?php echo $course->course_number; ?> -->
