@@ -51,6 +51,37 @@ class Program extends MySQLDB
         //returned. Otherwise, return false so that we know the user wasn't found
         return !empty( $result_array ) ? array_shift( $result_array ) : false;
     }
+	
+	
+	
+	// retrieving distinct program name based on the user id 
+	// used in flow chart drop down list
+	    public static function find_distinct_name( $userID )
+    {
+         $find_by_program_ID_sql = "select distinct program_name,program_code from users_has_programs,programs where users_id=$userID and programs_id=programs.id";
+           
+        //query the database with the user_login
+         return self::find_by_sql( $find_by_program_ID_sql );
+
+        //if the $result_array isn't empty use array_shift() so that only the user object inside the array is
+        //returned. Otherwise, return false so that we know the user wasn't found
+        //return !empty( $result_array ) ? array_shift( $result_array ) : false;
+    }
+    
+	// retrieving distinct program year based on the user id
+	// used in flow chart drop down list
+	    public static function find_distinct_year( $userID )
+    {
+         $find_by_program_ID_sql = "select distinct program_year from users_has_programs,programs where users_id=$userID and programs_id=programs.id";
+           
+        //query the database with the user_login
+         return self::find_by_sql( $find_by_program_ID_sql );
+
+        //if the $result_array isn't empty use array_shift() so that only the user object inside the array is
+        //returned. Otherwise, return false so that we know the user wasn't found
+        //return !empty( $result_array ) ? array_shift( $result_array ) : false;
+    }
+
 
     //used in manage_users
     public static function find_user_program( $userID )

@@ -72,28 +72,27 @@ if( !$session->is_logged_in() ) {
     <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
     <select name="drpProg" id="drpProg" onChange="drpProgChange">
       <option value="Select">Select a program </option>
+	
 	<?php
-        $programNameNew= Program::find_selected_user_program($_SESSION[ 'user_id' ]);    	 
+	   $progName= Program::find_distinct_name($_SESSION[ 'user_id' ]);
+	   $progYear= Program::find_distinct_year($_SESSION[ 'user_id' ]);
+           	 
 		
-	foreach($programNameNew as $program)
+	foreach($progName as $program)
 	{
-		
 		echo "<option value=".$program->program_code.">".$program->program_name."</option>";
-		
-		
 	}
 	
      ?></select>
+     
+     
      <select name="drpYear">
       <option value="Select">Select a year </option>
 	<?php
     
-	foreach($programNameNew as $program)
+	foreach($progYear as $program)
 	{
-		
 		echo "<option value=".$program->program_year.">".$program->program_year."</option>";
-		
-		
 	}
 	
      ?></select>
@@ -119,7 +118,6 @@ if( !$session->is_logged_in() ) {
 		 	 
 		 $drpYearValue = $_POST['drpYear'];
 		 $drpProgValue = $_POST['drpProg'];
-		
 		$program_New = Program::find_by_program_code_and_year($drpProgValue, $drpYearValue);
     
 	foreach($program_New as $program_New1)
