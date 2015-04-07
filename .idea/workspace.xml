@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="0b39339b-3ee4-4143-9e7a-9a8cdedde8e2" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Course Management Portal/inc/classes/Student.php" afterPath="$PROJECT_DIR$/Course Management Portal/inc/classes/Student.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Course Management Portal/js/common.js" afterPath="$PROJECT_DIR$/Course Management Portal/js/common.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Course Management Portal/flow-chart.php" afterPath="$PROJECT_DIR$/Course Management Portal/flow-chart.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Course Management Portal/header.php" afterPath="$PROJECT_DIR$/Course Management Portal/header.php" />
     </list>
     <ignored path="CMP.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -47,32 +50,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Student.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Course Management Portal/inc/classes/Student.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.46" vertical-offset="257" max-vertical-offset="5542">
-              <caret line="7" column="46" selection-start-line="7" selection-start-column="46" selection-end-line="7" selection-end-column="46" />
-              <folding>
-                <marker date="1428385299467" expanded="true" signature="1090:1185" placeholder="SELECT ID, s..self_table_name..." />
-                <marker date="1428385299467" expanded="true" signature="1386:1464" placeholder="SELECT * FRO..self_table_name..." />
-                <marker date="1428385299467" expanded="true" signature="1934:2026" placeholder="SELECT progr..programs..." />
-                <marker date="1428385299467" expanded="true" signature="3115:3137" placeholder="SELECT * FRO..students..." />
-                <marker date="1428385299467" expanded="true" signature="3621:3817" placeholder="SELECT *, (S..." />
-                <marker date="1428385299467" expanded="true" signature="3632:3691" placeholder="SELECT ID FR..programs..." />
-                <marker date="1428385299467" expanded="true" signature="4426:4567" placeholder="SELECT * FRO..student_grades..." />
-                <marker date="1428385299467" expanded="true" signature="5170:5313" placeholder="SELECT * FRO..student_grades..." />
-                <marker date="1428385299467" expanded="true" signature="6449:6536" placeholder="SELECT * FRO..self_table_name..." />
-                <marker date="1428385299467" expanded="true" signature="8232:8319" placeholder="SELECT * FRO..self_table_name..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="MySQL - cmp@localhost" pinned="false" current-in-tab="false">
         <entry file="dbDummy://db-console:/f1bc8612/b327512f-5fde-4dfe-bb12-ea754beadd04/">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-2.2666667" vertical-offset="0" max-vertical-offset="170">
               <caret line="4" column="30" selection-start-line="4" selection-start-column="30" selection-end-line="4" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="header.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Course Management Portal/header.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.98176295" vertical-offset="0" max-vertical-offset="1139">
+              <caret line="19" column="38" selection-start-line="19" selection-start-column="38" selection-end-line="19" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -172,29 +164,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="inc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CMP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CMP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Course Management Portal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="inc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="classes" />
+              <option name="myItemId" value="js" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -241,8 +211,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1296" height="699" extended-state="1" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1296" height="699" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32881355" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -329,6 +299,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Course Management Portal/inc/classes/Student.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.46" vertical-offset="257" max-vertical-offset="5542">
+          <caret line="7" column="46" selection-start-line="7" selection-start-column="46" selection-end-line="7" selection-end-column="46" />
+          <folding>
+            <marker date="1428386770680" expanded="true" signature="-1:-1" placeholder="SELECT ID, s..self_table_name..." />
+            <marker date="1428386770680" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..self_table_name..." />
+            <marker date="1428386770680" expanded="true" signature="-1:-1" placeholder="SELECT progr..programs..." />
+            <marker date="1428386770680" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..students..." />
+            <marker date="1428386770680" expanded="true" signature="-1:-1" placeholder="SELECT *, (S..." />
+            <marker date="1428386770680" expanded="true" signature="-1:-1" placeholder="SELECT ID FR..programs..." />
+            <marker date="1428386770680" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..student_grades..." />
+            <marker date="1428386770680" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..student_grades..." />
+            <marker date="1428386770680" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..self_table_name..." />
+            <marker date="1428386770680" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..self_table_name..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="dbDummy://db-console:/f1bc8612/b327512f-5fde-4dfe-bb12-ea754beadd04/">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.2666667" vertical-offset="0" max-vertical-offset="170">
@@ -337,22 +326,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Course Management Portal/inc/classes/Student.php">
+    <entry file="file://$PROJECT_DIR$/Course Management Portal/js/common.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.46" vertical-offset="257" max-vertical-offset="5542">
-          <caret line="7" column="46" selection-start-line="7" selection-start-column="46" selection-end-line="7" selection-end-column="46" />
-          <folding>
-            <marker date="1428385299467" expanded="true" signature="1090:1185" placeholder="SELECT ID, s..self_table_name..." />
-            <marker date="1428385299467" expanded="true" signature="1386:1464" placeholder="SELECT * FRO..self_table_name..." />
-            <marker date="1428385299467" expanded="true" signature="1934:2026" placeholder="SELECT progr..programs..." />
-            <marker date="1428385299467" expanded="true" signature="3115:3137" placeholder="SELECT * FRO..students..." />
-            <marker date="1428385299467" expanded="true" signature="3621:3817" placeholder="SELECT *, (S..." />
-            <marker date="1428385299467" expanded="true" signature="3632:3691" placeholder="SELECT ID FR..programs..." />
-            <marker date="1428385299467" expanded="true" signature="4426:4567" placeholder="SELECT * FRO..student_grades..." />
-            <marker date="1428385299467" expanded="true" signature="5170:5313" placeholder="SELECT * FRO..student_grades..." />
-            <marker date="1428385299467" expanded="true" signature="6449:6536" placeholder="SELECT * FRO..self_table_name..." />
-            <marker date="1428385299467" expanded="true" signature="8232:8319" placeholder="SELECT * FRO..self_table_name..." />
-          </folding>
+        <state vertical-scroll-proportion="-20.549295" vertical-offset="7295" max-vertical-offset="7650">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Course Management Portal/header.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.98176295" vertical-offset="0" max-vertical-offset="1139">
+          <caret line="19" column="38" selection-start-line="19" selection-start-column="38" selection-end-line="19" selection-end-column="38" />
+          <folding />
         </state>
       </provider>
     </entry>
