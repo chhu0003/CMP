@@ -50,6 +50,22 @@ class Course extends MySQLDB
 	 *
 	 * @return bool|mixed
 	 */
+    
+    //function added by Terry
+    public static function get_id_by_course_number( $course_number )
+	{
+
+		$find_course_by_course_number_sql = "SELECT ID, course_number FROM " . self::$table_name . " WHERE course_number='$course_number'";
+
+		//query the database with the user_login
+		$result_array = parent::find_by_sql( $find_course_by_course_number_sql );
+
+		//if the $result_array isn't empty use array_shift() so that only the course object inside the array is
+		//returned. Otherwise, return false so that we know the user wasn't found
+		return !empty( $result_array ) ? array_shift( $result_array ) : false;
+
+
+	}
 	public static function find_by_course_number( $course_number )
 	{
 
