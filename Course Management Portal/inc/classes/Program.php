@@ -1,7 +1,9 @@
 <?php
 
+
 /**
- * Author: Jaymanee
+ * Author: Eric Tubby
+ * Adapted by: Caroline Gagnon
  *
  * Class Program
  *
@@ -20,23 +22,23 @@ class Program extends MySQLDB
 
 	protected static $database_fields = array(
 		'ID',
-		'program_code',
 		'program_name',
+		'program_code',
 		'program_version',
 		'program_flowchart',
 		'program_year',
-	);
+    );
+
 
 	public $ID;
-	public $program_code;
 	public $program_name;
+	public $program_code;
 	public $program_version;
 	public $program_flowchart;
 	public $program_year;
 
-	public function __construct()
-	{
-	}
+	public function __construct() { }
+
     public static function find_by_program_ID( $ID )
     {
 
@@ -78,7 +80,6 @@ class Program extends MySQLDB
 	 * @return array
 	 */
 	public static function find_by_program_name( $program_name )
-	
 	{
 
 		$find_program_by_program_name_sql = "SELECT * FROM " . self::$table_name . " WHERE program_name='$program_name' ORDER BY 'program_name'";
@@ -87,57 +88,36 @@ class Program extends MySQLDB
 
 
 	}
+
 	/**
-	 * @param $program_code
+	 * @param $program_year
 	 *
-	 * @return bool|mixed
+	 * @return array
 	 */
-	public static function find_by_program_code_and_year($code, $year)
-	{
-		$find_by_program_code_and_year_sql = "select * from ". self::$table_name ." WHERE program_code='$code' and program_year=$year";
-		//echo $find_by_program_code_and_year_sql;
-		return self::find_by_sql( $find_by_program_code_and_year_sql );
-	}
-	
-	public static function find_by_program_ID( $ID )
+	public static function find_by_program_year( $program_year )
 	{
 
-		$find_by_program_ID_sql = "SELECT * FROM " . self::$table_name . " WHERE ID='$ID'";
+		$find_by_program_year_sql = "SELECT * from " . self::$table_name . " WHERE program_year =" . $program_year;
 
-		//query the database with the user_login
-		$result_array = parent::find_by_sql( $find_by_program_ID_sql );
+		return self::find_by_sql( $find_by_program_year_sql );
 
-		//if the $result_array isn't empty use array_shift() so that only the user object inside the array is
-		//returned. Otherwise, return false so that we know the user wasn't found
-		return !empty( $result_array ) ? array_shift( $result_array ) : false;
 	}
 
-    //used in manage_users
-	public static function find_user_program( $userID )
+	/**
+	 * @param $program_version
+	 *
+	 * @return array
+	 */
+	public static function find_by_program_version( $program_version )
 	{
-		$selectPrograms = "";
-		if ($userID > 0)
-		{
-			$selectPrograms = "SELECT programs.ID, programs.program_name, programs.program_year FROM programs";
-			$selectPtograms .= " where programs.ID Not in (SELECT programs_ID FROM users_has_programs WHERE users_has_programs.users_ID=$userID) order by programs.program_name, programs.program_year"; 
-		}else{
-			$selectPrograms = "SELECT programs.ID, programs.program_name, programs.program_year FROM programs order by programs.program_name, programs.program_year"; 
-		}
 
-		//return the results as a program object
-		return self::find_by_sql( $selectPrograms );
+        $find_by_program_version_sql = "SELECT * from " . self::$table_name . " WHERE program_version =" . $program_version;
+
+        return self::find_by_sql( $find_by_program_version_sql );
+
 	}
 
-    //User in manage_users
-	public static function find_selected_user_program( $userID )
-	{
-		$selectPrograms = "SELECT  programs.ID, programs.program_name, programs.program_code, programs.program_year";
-		$selectPrograms .= " FROM programs, users_has_programs WHERE users_has_programs.users_ID=$userID and users_has_programs.programs_id = programs.ID"; 
-
-		//return the results as a program object
-		return self::find_by_sql( $selectPrograms );
-	}
-	 /**
+    /**
      * @param $program_code
      *
      * @return array
@@ -161,7 +141,6 @@ class Program extends MySQLDB
         $find_by_program_flowchart_sql = "SELECT * from " . self::$table_name . " WHERE program_version =" . $program_flowchart;
 
         return self::find_by_sql( $find_by_program_flowchart_sql );
-		
 
     }
 
@@ -175,11 +154,11 @@ class Program extends MySQLDB
     {
 
         $find_distinct_program_sql = "SELECT program_name, program_code, GROUP_CONCAT(DISTINCT program_year ORDER BY program_year DESC) as program_year FROM " . static::$table_name . " group by program_name";
-		 return self::find_by_sql( $find_distinct_program_sql );
-		
-	}
-}
 
+        return self::find_by_sql( $find_distinct_program_sql );
+
+    }
+}
 /**
  * Class UserPrograms
  *
@@ -188,20 +167,7 @@ class Program extends MySQLDB
  */
 class UserProgram extends Program
 {
-	protected static $table_name = "users_has_programs";
-
-	protected static $database_fields = array(
-		'users_id',
-		'programs_ID',
-	);
-
-	public $users_id;
-	public $programs_ID;
-}
-
-class ProgramCourses extends Program
-{
-	 protected static $table_name = "users_has_programs";
+    protected static $table_name = "users_has_programs";
 
     protected static $database_fields = array(
         'users_id',
@@ -215,9 +181,11 @@ class ProgramCourses extends Program
     {
 
         $find_by_user_ID_sql = "SELECT * FROM " . self::$table_name . " WHERE USERS_ID='$ID'";
-		 //query the database with the user_login
+
+        //query the database with the user_login
         $result_array = parent::find_by_sql( $find_by_user_ID_sql );
-		 //if the $result_array isn't empty use array_shift() so that only the user object inside the array is
+
+        //if the $result_array isn't empty use array_shift() so that only the user object inside the array is
         //returned. Otherwise, return false so that we know the user wasn't found
         return !empty( $result_array ) ? array_shift( $result_array ) : false;
     }
@@ -244,7 +212,6 @@ class ProgramCourses extends Program
         $result_array = parent::find_by_sql( $find_by_program_ID_sql );
 
         //if the $result_array isn't empty use array_shift() so that only the user object inside the array is
-		 //if the $result_array isn't empty use array_shift() so that only the user object inside the array is
         //returned. Otherwise, return false so that we know the user wasn't found
         return !empty( $result_array ) ? array_shift( $result_array ) : false;
     }
