@@ -177,18 +177,16 @@ class Student extends MySQLDB
 
     }
 
-    public static function find_all_by_missing_course($programID,$year)
+    public static function find_all_by_missing_course($programID)
     {
-     $find_all_by_missing_course_sql = "SELECT * FROM student_grades AND" .self::$table_name .
-         "WHERE student_grades.letter_grade = null AND programID{$programID} AND year={$year}";
+        $find_all_by_missing_course_sql = "SELECT s.student_number, s.student_fname, s.student_lname, c.course_number, c.course_name ";
+        $find_all_by_missing_course_sql .= "from students s, programs_has_courses p, courses c ";
+        $find_all_by_missing_course_sql .= "where s.programs_id = p.programs_id and c.ID = P.courses_id and s.programs_id = ".$programID ;
+        $find_all_by_missing_course_sql .= " and courses_id not in (select sc.courses_id from students s, student_courses sc where s.ID = sc.students_id and s.programs_id =".$programID.")";
 
         //query the database with the user_login
-        $result_array = parent::find_by_sql( $find_all_by_missing_course_sql );
-
-       //if the $result_array isn't empty use array_shift() so that only the user object inside the array is
-        //returned. Otherwise, return false so that we know the user wasn't found
-        //return !empty( $result_array ) ? array_shift( $result_array ) : false;
-        return !empty( $result_array ) ? $result_array : false;
+        $result_array = parent::find_by_sql($find_all_by_missing_course_sql);
+        return !empty($result_array) ? $result_array : false;
     }
     public static function find_all_by_failed_course($programID,$year)
     {
