@@ -19,39 +19,40 @@ if( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' ) {
 	$txtStudentPhone = $_POST[ 'txtStudentPhone' ];
 	$txtLetterGrade = $_POST[ 'txtLetterGrade' ];
 	$txtGraduateYear = $_POST[ 'txtGraduateYear' ];
-		
-	$courseId = $_POST['txtCourseId'];			
-
+			
+	$courseId = $_POST['txtCourseId'];
+	
 	
 	if( isset( $_POST[ 'editStudent' ] ) ) {
-			$error = 0;
-			//check to see if the user exists
-			$student = Student::find_by_student_number( $txtStudentNumber );
-			//if the user exists
-			if( $student ) {
-				//assign the values
-				$student->txtStudentNumber = $txtStudentNumber;
+		$error = 0;
+		//check to see if the student exists
+		$student = Student::find_by_student_number( $txtStudentNumber );
+		//if the student exists
+		if( $student ) {
+			//assign the values
+			$student->txtStudentNumber = $txtStudentNumber;
+  
+			if ($error == 0){
+				$student->student_fname = $txtFirstName;
+				$student->student_lname = $txtLastName;
+				$student->student_email = $txtStudentEmail;
+				$student->student_phone  = $txtStudentPhone;
+				//$student->graduating_year  = $txtGraduateYear;
+  
+				//update the student in the db
+				$successfulUpdate = $student->editStudent_courseGrade($txtStudentNumber, $txtFirstName, $txtLastName, $txtStudentPhone, $txtStudentEmail, $txtLetterGrade, $txtGraduateYear, $courseId);  
 
-				if ($error == 0){
-					$student->student_fname = $txtFirstName;
-					$student->student_lname = $txtLastName;
-					$student->student_email = $txtStudentEmail;
-					$student->student_phone  = $txtStudentPhone;
-					//$student->graduating_year  = $txtGraduateYear;
-
-					//update the user in the db
-					$successfulUpdate = $student->editStudent_courseGrade($txtStudentNumber, $txtFirstName, $txtLastName, $txtStudentPhone, $txtStudentEmail, $txtLetterGrade, $txtGraduateYear, $courseId);
-
-
-//					if ($successfulUpdate)
-//					{
-//						echo "User successfully updated.";
-//					}
-//					else
-//					{
-//						echo "User NOT successfully updated.";
-//					}
-					
+//		//unset( $Globals['student'] );
+//		unset($_POST);
+//		
+//				$txtStudentNumber = '';
+//				$txtFirstName = '';
+//				$txtLastName = '';
+//				$txtStudentEmail = '';
+//				$txtStudentPhone = '';
+//				$txtLetterGrade = '';
+//				$txtGraduateYear = '';
+				echo "Student successfully edited.";					
 				}
 			}
 
@@ -64,8 +65,7 @@ if( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' ) {
 		$student->archive_date($txtStudentNumber);
 
 		//unset the POST values so that the form doesn't get filled with the values of the deleted user
-		unset( $Globals['student'] );
-
+				unset($_GET);
 		
 				$txtStudentNumber = '';
 				$txtFirstName = '';
@@ -101,13 +101,13 @@ $students1 = Student::find_by_student_number($_GET[ 'student_ID' ]);
 	}*/
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-<script src="js/common.js"></script>
+<script src="../../Course Management Portal/js/common.js"></script>
 
 <!--<body onresize="window.location.reload(false);">-->
 
 
 <!----><div class="PopupPage-FormHolder manage-students">
-
+<!--<div class="error-message"><?php /*?> <?php ( !empty( $errorMessage ) ) ? print( $errorMessage ) : print( '' ); ?><?php */?> </div>-->
 <!--    <form id="student-lookup"> 
     <input type="text" size="30" onkeyup="getResultsFromFlowChartSearch(this.value)" placeholder="Student Lookup">
     <div id="flowchart-search-results"></div>
@@ -151,17 +151,15 @@ $students1 = Student::find_by_student_number($_GET[ 'student_ID' ]);
 </script> 
           		
 	<select size="15" name="txtCourseListGrade" id="txtCourseListGrade" style="width:400px;" onchange="showCourseGrade('<?php echo $studentGrad->letter_grade ?>');" >
-		  <?php // $studentGrad->letter_grade, $courseListGrade->courses_ID ;
-  
-  $studentCoursesGrades = StudentCourse::find_by_student_number($_GET['student_ID']);
-		//var_dump($studentCoursesGrades);
-		foreach( $studentCoursesGrades as $courseListGrade ) {
-  // echo $courseListGrade->courses_ID;
-  $courseList=Course::find_by_course_id($courseListGrade->courses_ID);
-  $studentGrad= StudentGrade::find_by_student_number_and_course_ID($_GET['student_ID'],$courseListGrade->courses_ID);
-		echo "<option label='$courseListGrade->courses_ID' value='$studentGrad->letter_grade' >". $courseList->course_name ." : ".strtoupper($studentGrad->letter_grade)."</option>";  
-		}
-  ?>  
+		  <?php 
+			$studentCoursesGrades = StudentCourse::find_by_student_number($_GET['student_ID']);
+			
+			foreach( $studentCoursesGrades as $courseListGrade ) {
+			$courseList=Course::find_by_course_list($courseListGrade->courses_ID);
+			$studentGrad= StudentGrade::find_by_student_number_and_course_ID($_GET['student_ID'],$courseListGrade->courses_ID);
+				  echo "<option label='$courseListGrade->courses_ID' value='$studentGrad->letter_grade' >". $courseList->course_name ." : ".strtoupper($studentGrad->letter_grade)."</option>";  
+			}
+		  ?>  
   </select>
                 
 			</td>

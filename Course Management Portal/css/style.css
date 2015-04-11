@@ -5,6 +5,7 @@ body
 	padding:0;
     background-color: #f1f1f1;
 }
+
 .Round-Button
 {
 	border-radius:25px;
@@ -643,4 +644,39 @@ footer{
 .reports .error-message { margin: 20px 0 0 51px;}
 
 
+
+.lstAvailablePrograms
+{
+    display:block;
+    float:left;
+    width:400px;
+    height: 550px;
+}
+.lstUserPrograms
+{
+    margin: -37px 15px 0 0;
+    height: 550px;
+    width:400px;
+    display:block;
+    float:right;
+}
+.controls {
+ width: 80px;
+ float: left;
+ margin: 10px;
+}
+ 
+.controls a {
+ background-color: #222222;
+ border-radius: 4px;
+ border: 2px solid #000;
+ color: #ffffff;
+ padding: 2px;
+ font-size: 14px;
+ text-decoration: none;
+ display: inline-block;
+ text-align: center;
+ margin: 5px;
+ width: 80px;
+}
 

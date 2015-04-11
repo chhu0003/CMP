@@ -2,6 +2,7 @@
 //get all of the includes
 require_once( dirname( __FILE__ ) . '/inc/includes.php' );
 $file_location='';
+
 ?>
 
 <html>
@@ -10,8 +11,7 @@ $file_location='';
 	<title>Upload Student CSV</title>
 	<link rel="stylesheet" href="css/style.css"/>
 	<script src="js/common.js"></script>
-
-
+    
 
 </head>
 <body>
@@ -50,8 +50,8 @@ $file_location='';
 
 		</section>
 <?
-$message = null;
 
+$message = null;
 
 $allowed_extensions = array('csv');
 
@@ -68,9 +68,10 @@ if (!empty($_FILES['file'])) {
 
 			if (move_uploaded_file($_FILES['file']['tmp_name'], $upload_path.'/'.$_FILES['file']['name'])) {
              $location = $upload_path.'/'.$_FILES['file']['name'];
-				$file_location = $location;
-
-				echo "<a href='STUPIDCSV.php?file=$location'>uploadCSV</a>";
+				$file_location = $_SESSION['location'];
+                session_start(); 
+                
+                echo '<h3>Preview of CSV</h3><form action="upload.php"><input type="submit" value="Confirm Upload"></form>';
 
 
 				if (($handle = fopen($location, "r")) !== false) {
@@ -81,8 +82,8 @@ if (!empty($_FILES['file'])) {
 					$insert = array();
 
 					$line = 1;
-					echo "<div class='scrollWrapper'>";
-					echo "<table border='1'>\n\n";
+					echo '<div style="width: 100%; height: 400px; overflow: scroll;">';
+					echo "<table border='1'>\n\n ";
 					echo "<tbody>";
 					while (($row = fgetcsv($handle, 0, ',', '"')) !== FALSE) {
 						echo "<tr>";
