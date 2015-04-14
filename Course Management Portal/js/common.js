@@ -455,7 +455,7 @@ function addColor(courseId,grade)
 {
 	if(grade=='F')
 	{
-	document.getElementById(courseId).style.backgroundColor="red";
+	document.getElementById(courseId).style.backgroundColor="FF7373";
 	}
 	else if(grade=="")
 	{
@@ -463,12 +463,21 @@ function addColor(courseId,grade)
 	}
 	else 
 	{
-		document.getElementById(courseId).style.backgroundColor="green";
+		document.getElementById(courseId).style.backgroundColor="66FF66";
 	}
 }
 
-function displayProgramName(programName){
-	document.getElementById('programName').innerHTML=programName;
+function displayProgramName(programName,programYear){
+
+	document.getElementById('programName').innerHTML=programName +'-' +programYear;
+}
+
+function displayOptions(programCode)
+{
+	document.getElementById('drpProg').value = programCode;
+	//document.getElementById('drpYear').value = programYear;
+	
+	
 }
 
 

@@ -416,6 +416,10 @@ ul#flowchart-nav  li{
     margin: 0 auto;
    /* width: 210px;*/
 }
+.drpAlign{
+	margin-top:10px;
+	text-align:center;
+}
 
 ul#flowchart-nav li input{
     line-height: 0;
