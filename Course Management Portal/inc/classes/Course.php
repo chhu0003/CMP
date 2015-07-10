@@ -44,6 +44,20 @@ class Course extends MySQLDB
 
 
 	public function __construct() { }
+	
+	public static function get_student_courses_and_grades( $student_num )
+	{
+
+$get_student_courses_and_grades_sql = 
+			"SELECT course_name,letter_grade FROM student_grades,courses WHERE courses.id=courses_ID AND students_student_number=$student_num";
+			
+	//query the database with the user_login
+		$result_array = parent::find_by_sql( $get_student_courses_and_grades_sql );
+   
+		//if the $result_array isn't empty use array_shift() so that only the course object inside the array is
+		//returned. Otherwise, return false so that we know the user wasn't found
+		return !empty( $result_array ) ? array_shift( $result_array ) : false;
+	} 
 
 	/**
 	 * @param $course_number
@@ -55,7 +69,7 @@ class Course extends MySQLDB
     public static function get_id_by_course_number( $course_number )
 	{
 
-		$find_course_by_course_number_sql = "SELECT ID, course_number FROM " . self::$table_name . " WHERE course_number='$course_number'";
+		$find_course_by_course_number_sql = "SELECT ID, course_number, course_name FROM " . self::$table_name . " WHERE course_number='$course_number'";
 
 		//query the database with the user_login
 		$result_array = parent::find_by_sql( $find_course_by_course_number_sql );
@@ -66,6 +80,8 @@ class Course extends MySQLDB
 
 
 	}
+	
+	
 	public static function find_by_course_number( $course_number )
 	{
 
@@ -80,6 +96,23 @@ class Course extends MySQLDB
 
 
 	}
+
+
+	public static function find_by_course_list( $course_id )
+	{
+
+		$find_course_by_course_number_sql = "SELECT * FROM " . self::$table_name . " WHERE id=$course_id";
+       echo $find_course_by_course_number_sql;
+		//query the database with the user_login
+		$result_array = parent::find_by_sql( $find_course_by_course_number_sql );
+
+		//if the $result_array isn't empty use array_shift() so that only the course object inside the array is
+		//returned. Otherwise, return false so that we know the user wasn't found
+		return !empty( $result_array ) ? array_shift( $result_array ) : false;
+
+
+	}
+
 
 	/**
 	 * @param $courseLevel

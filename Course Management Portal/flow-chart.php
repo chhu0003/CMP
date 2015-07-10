@@ -66,6 +66,7 @@ if( !$session->is_logged_in() ) {
 	
 	echo "<h1 id='programName'>".$programName ."-". $program_year. "</h1>";
 	?>
+<<<<<<< HEAD
   
   <!--<h1>Internet Applications and Web Development - 3002X 2014-2015</h1>-->
   
@@ -77,6 +78,58 @@ if( !$session->is_logged_in() ) {
 	 
 	if(isset($_POST['btnSelect']))
 	{		 
+=======
+    
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
+    <select name="drpProg" id="drpProg" onChange="drpProgChange">
+      <option value="Select">Select a program </option>
+	
+	<?php
+	   $progName= Program::find_distinct_name($_SESSION[ 'user_id' ]);
+	   $progYear= Program::find_distinct_year($_SESSION[ 'user_id' ]);
+           	 
+		
+	foreach($progName as $program)
+	{
+		echo "<option value=".$program->program_code.">".$program->program_name."</option>";
+	}
+	
+     ?></select>
+     
+     
+     <select name="drpYear">
+      <option value="Select">Select a year </option>
+	<?php
+    
+	foreach($progYear as $program)
+	{
+		echo "<option value=".$program->program_year.">".$program->program_year."</option>";
+	}
+	
+     ?></select>
+     <input type="submit" name="btnSelect" value="Submit" />
+     </form>
+        	 
+	<?php if(isset($_GET[ 'student_number' ]))
+		 {
+			$students=Student::find_by_student_number($_GET['student_number']);
+			?>
+			<a href="#" class="" onclick="openWindow('edit-student.php?student_ID=<?php echo $_GET[ 'student_number' ] ?>')"><h3>    <?php echo $students->student_fname." ".$students->student_lname ?></h3></a>
+	
+	<?php
+		} 
+	$drpYearValue ='';
+	 $drpProgValue='';
+	// $program_id=1;
+	 
+	if(isset($_POST['btnSelect']))
+	{
+     if(isset($_POST['drpYear']) && isset($_POST['drpProg']))
+	 {
+		 	 
+		 $drpYearValue = $_POST['drpYear'];
+		 $drpProgValue = $_POST['drpProg'];
+>>>>>>> origin/master
 		$program_New = Program::find_by_program_code_and_year($drpProgValue, $drpYearValue);
 		
 	foreach($program_New as $program_New1)

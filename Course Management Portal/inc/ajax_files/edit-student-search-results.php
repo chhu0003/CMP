@@ -4,6 +4,7 @@
  * User: Eric Tubby
  * Date: 4/6/14
  * Time: 1:08 PM
+ * Modified by JM(April, 2015)
  */
 
 require_once( dirname( dirname( __FILE__ ) ) . '/includes.php' );
@@ -17,7 +18,7 @@ if( strlen( $search ) > 0 ) {
 	$hint = "";
 
 	//get all of the students
-	$allStudents = Student::find_all();
+	$allStudents = Student::find_all_by_archive_date($student_ID);
 
 	//loop through each of the students
 	foreach( $allStudents as $student  ) {

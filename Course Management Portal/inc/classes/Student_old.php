@@ -26,7 +26,7 @@ class Student extends MySQLDB
 		'student_phone',
 		'programs_id',
 		'graduating_year',
-		 //'course_name'
+		 'course_name'
 	);
 
 	public $ID;
